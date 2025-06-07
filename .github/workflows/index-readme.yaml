@@ -1,0 +1,78 @@
+name: Update README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/-/*.md'
+      - '!README.md'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            **/-/*.md
+            !README.md
+
+      - name: Process changed files
+        id: process
+        run: |
+          # Get the list of changed files
+          CHANGED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
+          
+          # Read current README
+          README_CONTENT=$(cat README.md)
+          
+          # Process each changed file
+          for file in $CHANGED_FILES; do
+            # Extract title from first heading
+            TITLE=$(grep -m 1 "^# " "$file" | sed 's/^# //')
+            
+            # Determine category from path
+            if [[ "$file" == *"kubernetes"* ]] || [[ "$file" == *"k8s"* ]]; then
+              CATEGORY="Kubernetes"
+            elif [[ "$file" == *"terraform"* ]]; then
+              CATEGORY="Terraform"
+            elif [[ "$file" == *"docker"* ]]; then
+              CATEGORY="Docker"
+            elif [[ "$file" == *"harbor"* ]]; then
+              CATEGORY="Harbor"
+            elif [[ "$file" == *"github"* ]] || [[ "$file" == *"actions"* ]]; then
+              CATEGORY="GitHub Actions"
+            else
+              CATEGORY="Other"
+            fi
+            
+            # Create new link
+            NEW_LINK="- [$TITLE]($file)"
+            
+            # Find the appropriate section
+            CATEGORY_PATTERN="<summary><strong>💛 $CATEGORY</strong></summary>"
+            if [[ "$README_CONTENT" == *"$CATEGORY_PATTERN"* ]]; then
+              # Insert new link after the category header
+              README_CONTENT=$(echo "$README_CONTENT" | sed "/$CATEGORY_PATTERN/a\\$NEW_LINK")
+            fi
+          done
+          
+          # Write updated README
+          echo "$README_CONTENT" > README.md
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: update README with new links"
+          file_pattern: README.md
+          branch: main

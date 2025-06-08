@@ -64,7 +64,8 @@ jobs:
           
           # Create new link
           LINK_BASE="https://github.com/eeeemune/Infra-Notes/blob/main/-/"
-          NEW_LINK="### [$TITLE]($LINK_BASE%5B$CATEGORY%5D%20$TITLE.md)\n"
+          ENCODED_FILENAME=$(echo "[$CATEGORY] $TITLE.md" | sed 's/ /%20/g')
+          NEW_LINK="### [$TITLE]($ENCODED_FILENAME)\n"
           
           # Find the appropriate section
           CATEGORY_PATTERN="## $CATEGORY"

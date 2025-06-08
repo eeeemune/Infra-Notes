@@ -23,4 +23,6 @@
    - 💛 Where does the **runner** live?
    - 💛 Example
 ## Basic
+### [[Basic] 2. Deploy an App]([Basic]%20[Basic]%202.%20Deploy%20an%20App.md)
+
 ### [[Basic] 1. Kubernetes Clusters]([Basic]%20[Basic]%201.%20Kubernetes%20Clusters.md)

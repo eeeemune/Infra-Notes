@@ -1,5 +1,5 @@
 # 💚 OCI (Open Container Images) and Registriesd
-d
+
 ## 💛 What is OCI?
 
 - **`OCI`** stands for **Open Container Initiative**

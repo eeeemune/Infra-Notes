@@ -97,6 +97,8 @@ jobs:
         run: |
           file="${{ steps.process.outputs.file }}"
           NEW_LINK="${{ steps.process.outputs.new_link }}"
+          NEW_LINK_RAW=$(echo "$NEW_LINK" | tr -d '\n')
+
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
           
           # Transform the content of the markdown file
@@ -124,19 +126,13 @@ jobs:
             # Create a temporary file for the transformed content
             echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
             
-            # Create a temporary file for the README content
-            echo -e "$README_CONTENT" > readme_temp.txt
-            
             # Use the temporary file to append content
-            sed -i "/$NEW_LINK/r transformed_content.txt" readme_temp.txt
-            
-            # Read the modified content back
-            README_CONTENT=$(cat readme_temp.txt)
-            
+            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
+
             echo "README_CONTENT: $README_CONTENT"
             
-            # Clean up
-            rm transformed_content.txt readme_temp.txt
+            # Clean upcon
+            rm transformed_content.txt
           fi
           
           # Save the final README content

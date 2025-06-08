@@ -100,24 +100,23 @@ jobs:
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
           
           # Transform the content of the markdown file
-          if [ -f "$file" ]; then
+          # Process the rest of the file
+          while IFS= read -r line || [ -n "$line" ]; do
+            if [[ $line =~ ^### ]]; then
+              # Level 3 heading -> 6 spaces + bullet
+              TRANSFORMED_CONTENT+="      - ${line#*### }\n"
+            elif [[ $line =~ ^## ]]; then
+              # Level 2 heading -> 3 spaces + bullet
+              TRANSFORMED_CONTENT+="   - ${line#*## }\n"
+            elif [[ $line =~ ^# ]]; then
+              # Level 1 heading -> bullet
+              TRANSFORMED_CONTENT+="- ${line#*# }\n"
+          done < <(tail -n +2 -- "$file")
+
+          echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
           
-            # Process the rest of the file
-            while IFS= read -r line || [ -n "$line" ]; do
-              if [[ $line =~ ^### ]]; then
-                # Level 3 heading -> 6 spaces + bullet
-                TRANSFORMED_CONTENT+="      - ${line#*### }\n"
-              elif [[ $line =~ ^## ]]; then
-                # Level 2 heading -> 3 spaces + bullet
-                TRANSFORMED_CONTENT+="   - ${line#*## }\n"
-              elif [[ $line =~ ^# ]]; then
-                # Level 1 heading -> bullet
-                TRANSFORMED_CONTENT+="- ${line#*# }\n"
-              fi
-            done < <(tail -n +2 -- "$file")
-            
-            # Append transformed content after the link
-            README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
+          # Append transformed content after the link
+          README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
           # Save the final README content

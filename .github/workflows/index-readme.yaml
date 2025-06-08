@@ -98,6 +98,10 @@ jobs:
           file="${{ steps.process.outputs.file }}"
           NEW_LINK="${{ steps.process.outputs.new_link }}"
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
+
+          echo "file: $file"
+          echo "new_link: $NEW_LINK"
+          echo "readme_content: $README_CONTENT"
           
           # Transform the content of the markdown file
           if [ -f "$file" ]; then

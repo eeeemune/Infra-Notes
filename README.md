@@ -28,3 +28,11 @@
 ### [[Basic] 2. Deploy an App]([Basic]%20[Basic]%202.%20Deploy%20an%20App.md)
 
 ### [[Basic] 1. Kubernetes Clusters]([Basic]%20[Basic]%201.%20Kubernetes%20Clusters.md)
+## Terraform
+### [Terraform Provider for Helm]([Terraform]%20Terraform%20Provider%20for%20Helm.md)
+- 💚 Terraform Provider for Helm
+   - 💛 What is the Terraform Provider for Helm?
+      - 🤍 Helm Chart
+      - 🤍 What it does
+      - 🤍 Why use it?
+   - 💛 Basic Example

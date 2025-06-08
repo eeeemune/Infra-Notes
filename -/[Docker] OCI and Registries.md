@@ -1,4 +1,4 @@
-# 💚 OCI (Open Container Images) and Registriesd
+# 💚 OCI (Open Container Images) and Registriesdd
 
 ## 💛 What is OCI?
 

@@ -45,3 +45,18 @@
       - 🤍 Example:
    - 💛 Helm Workflow
    - 🤍 Summary
+## Harbor
+### [What is Harbor]([Harbor]%20What%20is%20Harbor.md)
+- 💚 Harbor
+   - 💛 What is Harbor?
+   - 💛 Key Features
+      - 🤍 **Stores container images & Helm charts (OCI format)**
+      - 🤍 **Controls who can see or change things (RBAC)**
+      - 🤍 **Scans for security issues**
+      - 🤍 **Signs and verifies images (trust)**
+      - 🤍 **Replicates to other registries**
+      - 🤍 **Login with your company account (LDAP/AD)**
+      - 🤍 **Has a website and API**
+   - 💛 How Harbor fits with Helm and OCI
+   - 💛 Typical Use Cases
+   - 💛 References

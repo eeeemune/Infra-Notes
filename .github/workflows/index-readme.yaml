@@ -121,18 +121,19 @@ jobs:
             echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
             
             # Append transformed content after the link
-            README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
+            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
           # Save the final README content
           {
-            echo "readme_content<<EOF"
-            echo "$README_CONTENT"
-            echo "EOF"
+            echo -e "readme_content<<EOF"
+            echo -e "$README_CONTENT"
+            echo -e "EOF"
           } >> $GITHUB_OUTPUT
 
       - name: Update README
         run: |
+          echo "${{ steps.transform.outputs.readme_content }}" 
           echo "${{ steps.transform.outputs.readme_content }}" > README.md
 
       - name: Print README

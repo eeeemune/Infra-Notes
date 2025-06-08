@@ -3,7 +3,7 @@
 ## 💛 What is OCI?
 
 - **`OCI`** stands for **Open Container Initiative**
-- It defines **open standards for container image** formats and runtimes.
+- It defines **open standards for container image** formatsdf and runtimes.
 - OCI ensures **interoperability** across different tools, platforms, and registries.
 
 ## 💛 OCI Images

@@ -97,7 +97,8 @@ jobs:
         run: |
           file="${{ steps.process.outputs.file }}"
           NEW_LINK="${{ steps.process.outputs.new_link }}"
-          NEW_LINK_RAW=$(echo "$NEW_LINK" | tr -d '\n')
+          NEW_LINK_RAW=$(printf "%s" "$NEW_LINK")
+
 
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
           

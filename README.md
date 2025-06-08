@@ -37,6 +37,9 @@
       - 🤍 Why use it?
    - 💛 Basic Example
 ## Kubernetes
+### [What is K3s]([Kubernetes]%20What%20is%20K3s.md)
+
+
 ### [What is Helm]([Kubernetes]%20What%20is%20Helm.md)
 - 💚 What is Helm?
    - 💛 Short Answer

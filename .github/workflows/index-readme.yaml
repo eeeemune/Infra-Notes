@@ -121,21 +121,21 @@ jobs:
               fi
             done < "$file"
             
-            echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
+            # echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
             
             # Append transformed content after the link
             # Create a temporary file for the transformed content
-            echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
+            # echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
             
             echo "NEW_LINK_RAW: $NEW_LINK_RAW"
             echo "NEW_LINK: $NEW_LINK"
             
             # Use the temporary file to append content
-            echo -e "$README_CONTENT"
-            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r 11"
-            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/([Docker]%20OCI%20and%20Registries.md)/r 22"
-            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/[OCI and Registries]/r 33"
-            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/([Docker]%20OCI%20and%20Registries.md)/r 33"
+            # echo -e "$README_CONTENT"
+            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r transformed_content.txt""
+            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/([Docker]%20OCI%20and%20Registries.md)/r transformed_content.txt""
+            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/[OCI and Registries]/r transformed_content.txt""
+            echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/([Docker]%20OCI%20and%20Registries.md)/r transformed_content.txt""
             echo -e "$README_CONTENT" > readme_content.txt
             README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
 

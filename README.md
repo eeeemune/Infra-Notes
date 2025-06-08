@@ -37,6 +37,34 @@
       - 🤍 Why use it?
    - 💛 Basic Example
 ## Kubernetes
+### [What is The Kubernetes]([Kubernetes]%20What%20is%20The%20Kubernetes.md)
+- 💚 Background
+   - 💛 Monoliths
+      - 🤍 Disadvantages of Monoliths
+   - 💛 Microservices
+      - 🤍 How to Run Microservices
+- 💚 Kubernetes
+   - 💛 What is the Kubernetes?
+   - 💛 Key Goals
+      - 🤍 Maximize Capacity
+      - 🤍 Adapt to Demand
+      - 🤍 Don’t Go Dark
+      - 🤍 Abstraction
+   - 💛 Notations
+      - 🤍 Pod and Container
+      - 🤍 Node and Cluster
+   - 💛 Abstracted Infrastructure of Kubernetes
+      - 🤍 Why Abstracted Infra is Needed?
+      - 🤍 Immutable Template
+      - 🤍 Benefits
+   - 💛 Self-Healing in Kubernetes
+      - 🤍 Ideal State vs Actual State
+      - 🤍 Update Mechanisms
+      - 🤍 Labels
+      - 🤍 Services
+- 💚 References
+
+
 ### [What is K3s]([Kubernetes]%20What%20is%20K3s.md)
 
 

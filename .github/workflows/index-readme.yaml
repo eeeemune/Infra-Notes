@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - '**/-/*.md'
+      - '-/*.md'
       - '!README.md'
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
         uses: tj-actions/changed-files@v41
         with:
           files: |
-            **/-/*.md
+            -/*.md
             !README.md
 
       - name: Process changed files
@@ -33,42 +33,62 @@ jobs:
           # Get the list of changed files
           CHANGED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
           
+          echo "CHANGED_FILES: $CHANGED_FILES"
+          
           # Read current README
           README_CONTENT=$(cat README.md)
           
-          # Process each changed file
-          for file in $CHANGED_FILES; do
-            # Extract title from first heading
-            TITLE=$(grep -m 1 "^# " "$file" | sed 's/^# //')
-            
-            # Determine category from path
-            if [[ "$file" == *"kubernetes"* ]] || [[ "$file" == *"k8s"* ]]; then
-              CATEGORY="Kubernetes"
-            elif [[ "$file" == *"terraform"* ]]; then
-              CATEGORY="Terraform"
-            elif [[ "$file" == *"docker"* ]]; then
-              CATEGORY="Docker"
-            elif [[ "$file" == *"harbor"* ]]; then
-              CATEGORY="Harbor"
-            elif [[ "$file" == *"github"* ]] || [[ "$file" == *"actions"* ]]; then
-              CATEGORY="GitHub Actions"
-            else
-              CATEGORY="Other"
-            fi
-            
-            # Create new link
-            NEW_LINK="- [$TITLE]($file)"
-            
-            # Find the appropriate section
-            CATEGORY_PATTERN="<summary><strong>💛 $CATEGORY</strong></summary>"
-            if [[ "$README_CONTENT" == *"$CATEGORY_PATTERN"* ]]; then
-              # Insert new link after the category header
-              README_CONTENT=$(echo "$README_CONTENT" | sed "/$CATEGORY_PATTERN/a\\$NEW_LINK")
-            fi
-          done
+          # Process the file
+          file="$CHANGED_FILES"
+          if [ ! -f "$file" ]; then
+            echo "Warning: File $file does not exist"
+            exit 1
+          fi
+          
+          # Extract title from filename (remove .md and any category prefix)
+          filename=$(echo "$file" | awk -F'/' '{print $NF}')  # Get just the filename part
+          TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
+          
+          if [ -z "$TITLE" ]; then
+            echo "Warning: Could not extract title from filename: $file"
+            exit 1
+          fi
+          
+          # Extract category from filename (format: [Category]...)
+          CATEGORY=$(echo "$filename" | sed -n 's/.*\[\([^]]*\)\].*/\1/p')
+          
+          if [ -z "$CATEGORY" ]; then
+            echo "Warning: Could not determine category from filename: $file"
+            exit 1
+          fi
+          
+          # Create new link
+          LINK_BASE="https://github.com/eeeemune/Infra-Notes/blob/main/-/"
+          NEW_LINK="- [$TITLE]($LINK_BASE%5B$CATEGORY%5D%20$TITLE.md)\n"
+          
+          # Find the appropriate section
+          CATEGORY_PATTERN="## 💛 $CATEGORY"
+          if [[ "$README_CONTENT" == *"$CATEGORY_PATTERN"* ]]; then
+            # Insert new link after the category header
+            README_CONTENT=$(echo "$README_CONTENT" | sed "/$CATEGORY_PATTERN/a\\$NEW_LINK")
+          else
+            # Create new category section
+            NEW_SECTION="\n## 💛 $CATEGORY\n$NEW_LINK"
+            # Add new section at the end of the file
+            README_CONTENT="$README_CONTENT$NEW_SECTION"
+          fi
+          
+          echo "README_CONTENT: $README_CONTENT"
+          echo "CATEGORY: $CATEGORY"
+          echo "TITLE: $TITLE"
+          echo "NEW_LINK: $NEW_LINK"
           
           # Write updated README
-          echo "$README_CONTENT" > README.md
+          echo -e "$README_CONTENT" > README.md
+
+      - name: Print README
+        run: |
+          cat README.md
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -1,4 +1,4 @@
-# 💚 Commandsd
+# 💚 Commandsdd
 
 ```bash
 aws ecr get-login-password --region <region> --profile <profile_name> | docker login --username AWS --password-stdin <repository_url>

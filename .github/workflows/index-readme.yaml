@@ -126,6 +126,8 @@ jobs:
             
             # Use the temporary file to append content
             README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK/r transformed_content.txt")
+
+            echo "README_CONTENT: $README_CONTENT"
             
             # Clean up
             rm transformed_content.txt

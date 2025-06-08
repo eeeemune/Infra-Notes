@@ -125,6 +125,9 @@ jobs:
             # Append transformed content after the link
             # Create a temporary file for the transformed content
             echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
+
+            echo "NEW_LINK_RAW: $NEW_LINK_RAW"
+            echo "NEW_LINK: $NEW_LINK"
             
             # Use the temporary file to append content
             README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK_RAW/r transformed_content.txt")

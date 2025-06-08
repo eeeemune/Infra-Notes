@@ -121,7 +121,14 @@ jobs:
             echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
             
             # Append transformed content after the link
-            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
+            # Create a temporary file for the transformed content
+            echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
+            
+            # Use the temporary file to append content
+            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK/r transformed_content.txt")
+            
+            # Clean up
+            rm transformed_content.txt
           fi
           
           # Save the final README content

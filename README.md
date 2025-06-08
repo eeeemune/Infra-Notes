@@ -26,6 +26,15 @@
 ### [[Basic] 3. Kubernetes Services]([Basic]%20[Basic]%203.%20Kubernetes%20Services.md)
 
 ### [[Basic] 2. Deploy an App]([Basic]%20[Basic]%202.%20Deploy%20an%20App.md)
+- 💚 Reference
+- 💚 Objectives
+- 💚 Deployments
+   - 💛 What is a Deployment?
+   - 💛 Why is it Useful?
+   - 💛 What Happens If a Pod Dies?
+      - 🤍 Real-Life Example
+   - 💛 Summary
+
 
 ### [[Basic] 1. Kubernetes Clusters]([Basic]%20[Basic]%201.%20Kubernetes%20Clusters.md)
 ## Terraform
@@ -37,6 +46,17 @@
       - 🤍 Why use it?
    - 💛 Basic Example
 ## Kubernetes
+### [2. Deploy an App]([Kubernetes]%202.%20Deploy%20an%20App.md)
+- 💚 Reference
+- 💚 Objectives
+- 💚 Deployments
+   - 💛 What is a Deployment?
+   - 💛 Why is it Useful?
+   - 💛 What Happens If a Pod Dies?
+      - 🤍 Real-Life Example
+   - 💛 Summary
+
+
 ### [What is The Kubernetes]([Kubernetes]%20What%20is%20The%20Kubernetes.md)
 - 💚 Background
    - 💛 Monoliths

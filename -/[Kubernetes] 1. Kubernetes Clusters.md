@@ -1,5 +1,5 @@
 # 💚 Objectives
-1. Learn what a Kubernetes `cluster` is.
+1. Learn what a Kubernetes `cluster` is
 
 1. Learn what `Minikube` is.
 

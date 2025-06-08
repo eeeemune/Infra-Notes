@@ -65,7 +65,7 @@ jobs:
           # Create new link
           LINK_BASE="https://github.com/eeeemune/Infra-Notes/blob/main/-/"
           ENCODED_FILENAME=$(echo "[$CATEGORY] $TITLE.md" | sed 's/ /%20/g')
-          NEW_LINK="- [$TITLE]($LINK_BASE$ENCODED_FILENAME)\n"
+          NEW_LINK="### [$TITLE]($LINK_BASE$ENCODED_FILENAME)\n"
           
           # Find the appropriate section
           CATEGORY_PATTERN="## 💛 $CATEGORY"
@@ -77,6 +77,19 @@ jobs:
             NEW_SECTION="\n## 💛 $CATEGORY\n$NEW_LINK"
             # Add new section at the end of the file
             README_CONTENT="$README_CONTENT$NEW_SECTION"
+          fi
+          
+          # Transform the content of the markdown file
+          if [ -f "$file" ]; then
+            CONTENT=$(cat "$file")
+            # Transform headings to bullet points with proper indentation
+            TRANSFORMED_CONTENT=$(echo "$CONTENT" | sed -E '
+              s/^# (.*)/- \1/;
+              s/^## (.*)/  - \1/;
+              s/^### (.*)/        - \1/
+            ')
+            # Append transformed content after the link
+            README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
           echo "README_CONTENT: $README_CONTENT"

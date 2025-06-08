@@ -79,10 +79,22 @@ jobs:
             README_CONTENT="$README_CONTENT$NEW_SECTION"
           fi
           
+          # Save the current state for the next step
+          echo "file=$file" >> $GITHUB_OUTPUT
+          echo "new_link=$NEW_LINK" >> $GITHUB_OUTPUT
+          echo "readme_content=$README_CONTENT" >> $GITHUB_OUTPUT
+
+      - name: Transform markdown content
+        id: transform
+        run: |
+          file="${{ steps.process.outputs.file }}"
+          NEW_LINK="${{ steps.process.outputs.new_link }}"
+          README_CONTENT="${{ steps.process.outputs.readme_content }}"
+          
           # Transform the content of the markdown file
           if [ -f "$file" ]; then
             # Read the first line for the title
-            FIRST_LINE=$(head -n 1 "$file")
+            FIRST_LINE=$(head -n 1 -- "$file")
             if [ ! -z "$FIRST_LINE" ]; then
               # Add the title as a level 1 heading
               TRANSFORMED_CONTENT="# $FIRST_LINE\n"
@@ -100,19 +112,18 @@ jobs:
                 # Level 1 heading -> bullet
                 TRANSFORMED_CONTENT+="- ${line#*# }\n"
               fi
-            done < <(tail -n +2 "$file")
+            done < <(tail -n +2 -- "$file")
             
             # Append transformed content after the link
             README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
-          echo "README_CONTENT: $README_CONTENT"
-          echo "CATEGORY: $CATEGORY"
-          echo "TITLE: $TITLE"
-          echo "NEW_LINK: $NEW_LINK"
-          
-          # Write updated README
-          echo -e "$README_CONTENT" > README.md
+          # Save the final README content
+          echo "readme_content=$README_CONTENT" >> $GITHUB_OUTPUT
+
+      - name: Update README
+        run: |
+          echo "${{ steps.transform.outputs.readme_content }}" > README.md
 
       - name: Print README
         run: |

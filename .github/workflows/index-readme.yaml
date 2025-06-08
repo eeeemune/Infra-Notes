@@ -46,8 +46,8 @@ jobs:
           fi
           
           # Extract title from filename (remove .md and any category prefix)
-          filename=$(basename -- "$file")  # Get just the filename part
-          TITLE=$(echo "$filename" | sed -E 's|\.md$||' | sed -E 's|^\[[^]]+\]\s*||')
+          filename=$(echo "$file" | awk -F'/' '{print $NF}')  # Get just the filename part
+          TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
           
           if [ -z "$TITLE" ]; then
             echo "Warning: Could not extract title from filename: $file"
@@ -55,7 +55,7 @@ jobs:
           fi
           
           # Extract category from filename (format: [Category]...)
-          CATEGORY=$(echo "$filename" | sed -n 's|.*\[\([^]]*\)\].*|\1|p')
+          CATEGORY=$(echo "$filename" | sed -n 's/.*\[\([^]]*\)\].*/\1/p')
           
           if [ -z "$CATEGORY" ]; then
             echo "Warning: Could not determine category from filename: $file"
@@ -64,32 +64,18 @@ jobs:
           
           # Create new link
           LINK_BASE="https://github.com/eeeemune/Infra-Notes/blob/main/-/"
-          ENCODED_FILENAME=$(echo "[$CATEGORY] $TITLE.md" | sed 's/ /%20/g')
-          NEW_LINK="### [$TITLE]($LINK_BASE$ENCODED_FILENAME)\n"
+          NEW_LINK="### [$TITLE]($LINK_BASE%5B$CATEGORY%5D%20$TITLE.md)\n"
           
           # Find the appropriate section
-          CATEGORY_PATTERN="## 💛 $CATEGORY"
+          CATEGORY_PATTERN="## $CATEGORY"
           if [[ "$README_CONTENT" == *"$CATEGORY_PATTERN"* ]]; then
             # Insert new link after the category header
             README_CONTENT=$(echo "$README_CONTENT" | sed "/$CATEGORY_PATTERN/a\\$NEW_LINK")
           else
             # Create new category section
-            NEW_SECTION="\n## 💛 $CATEGORY\n$NEW_LINK"
+            NEW_SECTION="\n## $CATEGORY\n$NEW_LINK"
             # Add new section at the end of the file
             README_CONTENT="$README_CONTENT$NEW_SECTION"
-          fi
-          
-          # Transform the content of the markdown file
-          if [ -f "$file" ]; then
-            CONTENT=$(cat -- "$file")
-            # Transform headings to bullet points with proper indentation
-            TRANSFORMED_CONTENT=$(echo "$CONTENT" | sed -E '
-              s/^# (.*)/- \1/;
-              s/^## (.*)/  - \1/;
-              s/^### (.*)/        - \1/
-            ')
-            # Append transformed content after the link
-            README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
           echo "README_CONTENT: $README_CONTENT"

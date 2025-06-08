@@ -1,6 +1,6 @@
 # 💚 OCI (Open Container Images) and Registries
 
-## 💛 What is OCI?s
+## 💛 What is OCI?
 
 - **`OCI`** stands for **Open Container Initiative**
 - It defines **open standards for container image** formatsdf and runtimes.

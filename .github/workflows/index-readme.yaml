@@ -47,7 +47,7 @@ jobs:
           
           # Extract title from filename (remove .md and any category prefix)
           filename=$(basename -- "$file")  # Get just the filename part
-          TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
+          TITLE=$(echo "$filename" | sed -E 's|\.md$||' | sed -E 's|^\[[^]]+\]\s*||')
           
           if [ -z "$TITLE" ]; then
             echo "Warning: Could not extract title from filename: $file"
@@ -55,7 +55,7 @@ jobs:
           fi
           
           # Extract category from filename (format: [Category]...)
-          CATEGORY=$(echo "$filename" | sed -n 's/.*\[\([^]]*\)\].*/\1/p')
+          CATEGORY=$(echo "$filename" | sed -n 's|.*\[\([^]]*\)\].*|\1|p')
           
           if [ -z "$CATEGORY" ]; then
             echo "Warning: Could not determine category from filename: $file"

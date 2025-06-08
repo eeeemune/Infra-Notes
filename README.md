@@ -24,6 +24,20 @@
    - 💛 Example
 ## Basic
 ### [[Basic] 3. Kubernetes Services]([Basic]%20[Basic]%203.%20Kubernetes%20Services.md)
+- 💚 Kubernetes Services
+   - 💛 What is a Service?
+   - 💛 Why Use a Service?
+   - 💛 Types of Services
+      - 🤍 ClusterIP
+      - 🤍 NodePort
+      - 🤍 LoadBalancer
+      - 🤍 ExternalName
+   - 💛 How Do Services Know Where to Send Traffic?
+      - 🤍 Example: Service with Selector
+   - 💛 What if There's No Selector?
+   - 🤍 Summary
+- Reference
+
 
 ### [[Basic] 2. Deploy an App]([Basic]%20[Basic]%202.%20Deploy%20an%20App.md)
 - 💚 Reference
@@ -46,6 +60,22 @@
       - 🤍 Why use it?
    - 💛 Basic Example
 ## Kubernetes
+### [3. Kubernetes Services]([Kubernetes]%203.%20Kubernetes%20Services.md)
+- 💚 Kubernetes Services
+   - 💛 What is a Service?
+   - 💛 Why Use a Service?
+   - 💛 Types of Services
+      - 🤍 ClusterIP
+      - 🤍 NodePort
+      - 🤍 LoadBalancer
+      - 🤍 ExternalName
+   - 💛 How Do Services Know Where to Send Traffic?
+      - 🤍 Example: Service with Selector
+   - 💛 What if There's No Selector?
+   - 🤍 Summary
+- Reference
+
+
 ### [2. Deploy an App]([Kubernetes]%202.%20Deploy%20an%20App.md)
 - 💚 Reference
 - 💚 Objectives

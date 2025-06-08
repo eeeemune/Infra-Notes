@@ -4,7 +4,7 @@
 aws ecr get-login-password --region <region> --profile <profile_name> | docker login --username AWS --password-stdin <repository_url>
 ```
 
-# 💚 Explain
+# 💚 Explaind
 
 ## 💛 Sign in Docker with Terminal
 

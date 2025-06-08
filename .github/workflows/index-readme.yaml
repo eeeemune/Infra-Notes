@@ -46,7 +46,7 @@ jobs:
           fi
           
           # Extract title from filename (remove .md and any category prefix)
-          filename=$(basename "$file")  # Get just the filename part
+          filename=$(basename -- "$file")  # Get just the filename part
           TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
           
           if [ -z "$TITLE" ]; then

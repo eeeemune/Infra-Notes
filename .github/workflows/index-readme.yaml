@@ -124,13 +124,19 @@ jobs:
             # Create a temporary file for the transformed content
             echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
             
+            # Create a temporary file for the README content
+            echo -e "$README_CONTENT" > readme_temp.txt
+            
             # Use the temporary file to append content
-            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/EOF/r transformed_content.txt")
-
+            sed -i "/$NEW_LINK/r transformed_content.txt" readme_temp.txt
+            
+            # Read the modified content back
+            README_CONTENT=$(cat readme_temp.txt)
+            
             echo "README_CONTENT: $README_CONTENT"
             
             # Clean up
-            rm transformed_content.txt
+            rm transformed_content.txt readme_temp.txt
           fi
           
           # Save the final README content

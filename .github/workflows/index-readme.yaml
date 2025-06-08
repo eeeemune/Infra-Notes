@@ -80,9 +80,17 @@ jobs:
           fi
           
           # Save the current state for the next step
-          echo "file=$file" >> $GITHUB_OUTPUT
-          echo "new_link=$NEW_LINK" >> $GITHUB_OUTPUT
-          echo "readme_content=$README_CONTENT" >> $GITHUB_OUTPUT
+          {
+            echo "file<<EOF"
+            echo "$file"
+            echo "EOF"
+            echo "new_link<<EOF"
+            echo "$NEW_LINK"
+            echo "EOF"
+            echo "readme_content<<EOF"
+            echo "$README_CONTENT"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Transform markdown content
         id: transform

@@ -100,27 +100,36 @@ jobs:
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
           
           # Transform the content of the markdown file
-          # Process the rest of the file
-          while IFS= read -r line || [ -n "$line" ]; do
-            if [[ $line =~ ^### ]]; then
-              # Level 3 heading -> 6 spaces + bullet
-              TRANSFORMED_CONTENT+="      - ${line#*### }\n"
-            elif [[ $line =~ ^## ]]; then
-              # Level 2 heading -> 3 spaces + bullet
-              TRANSFORMED_CONTENT+="   - ${line#*## }\n"
-            elif [[ $line =~ ^# ]]; then
-              # Level 1 heading -> bullet
-              TRANSFORMED_CONTENT+="- ${line#*# }\n"
-          done < <(tail -n +2 -- "$file")
-
-          echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
-          
-          # Append transformed content after the link
-          README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
+          if [ -f "$file" ]; then
+            # Initialize transformed content
+            TRANSFORMED_CONTENT=""
+            
+            # Process the file line by line
+            while IFS= read -r line || [ -n "$line" ]; do
+              if [[ $line =~ ^### ]]; then
+                # Level 3 heading -> 6 spaces + bullet
+                TRANSFORMED_CONTENT+="      - ${line#*### }\n"
+              elif [[ $line =~ ^## ]]; then
+                # Level 2 heading -> 3 spaces + bullet
+                TRANSFORMED_CONTENT+="   - ${line#*## }\n"
+              elif [[ $line =~ ^# ]]; then
+                # Level 1 heading -> bullet
+                TRANSFORMED_CONTENT+="- ${line#*# }\n"
+              fi
+            done < "$file"
+            
+            echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
+            
+            # Append transformed content after the link
+            README_CONTENT=$(echo "$README_CONTENT" | sed "/$NEW_LINK/a\\$TRANSFORMED_CONTENT")
           fi
           
           # Save the final README content
-          echo "readme_content=$README_CONTENT" >> $GITHUB_OUTPUT
+          {
+            echo "readme_content<<EOF"
+            echo "$README_CONTENT"
+            echo "EOF"
+          } >> $GITHUB_OUTPUT
 
       - name: Update README
         run: |

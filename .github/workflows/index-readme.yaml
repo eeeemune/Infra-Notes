@@ -46,7 +46,7 @@ jobs:
           fi
           
           # Extract title from filename (remove .md and any category prefix)
-          filename=$(echo "$file" | awk -F'/' '{print $NF}')  # Get just the filename part
+          filename=$(basename "$file")  # Get just the filename part
           TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
           
           if [ -z "$TITLE" ]; then
@@ -81,7 +81,7 @@ jobs:
           
           # Transform the content of the markdown file
           if [ -f "$file" ]; then
-            CONTENT=$(cat "$file")
+            CONTENT=$(cat -- "$file")
             # Transform headings to bullet points with proper indentation
             TRANSFORMED_CONTENT=$(echo "$CONTENT" | sed -E '
               s/^# (.*)/- \1/;

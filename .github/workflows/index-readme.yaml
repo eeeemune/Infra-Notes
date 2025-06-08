@@ -90,6 +90,9 @@ jobs:
             echo "readme_content<<EOF"
             echo "$README_CONTENT"
             echo "EOF"
+            echo "title<<EOF"
+            echo "$TITLE"
+            echo "EOF"
           } >> $GITHUB_OUTPUT
 
       - name: Transform markdown content
@@ -97,7 +100,7 @@ jobs:
         run: |
           file="${{ steps.process.outputs.file }}"
           NEW_LINK="${{ steps.process.outputs.new_link }}"
-          NEW_LINK_RAW=$(echo -e "$NEW_LINK")
+          NEW_LINK_RAW="${{ steps.process.outputs.title }}"
 
 
           README_CONTENT="${{ steps.process.outputs.readme_content }}"
@@ -129,7 +132,10 @@ jobs:
             
             echo "NEW_LINK_RAW: $NEW_LINK_RAW"
             echo "NEW_LINK: $NEW_LINK"
-            
+
+            GOGO=$(echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
+            echo $GOGO
+
             # Use the temporary file to append content
             # echo -e "$README_CONTENT"
             # echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r transformed_content.txt""
@@ -139,7 +145,7 @@ jobs:
             # echo -e "$README_CONTENT" > readme_content.txt
             README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
 
-            echo "README_CONTENT: $README_CONTENT"
+            # echo "README_CONTENT: $README_CONTENT"
             
             # Clean upcon
             # rm transformed_content.txt

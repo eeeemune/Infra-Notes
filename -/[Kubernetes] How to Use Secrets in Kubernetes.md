@@ -3,7 +3,7 @@
 ## 💛 Create a Secret
 
 ```bash
-kubectl create secret generic <name> \
+kubectl create secret generic <name>  \
     --from-literal=username=admin \
     --from-literal=password='S!B\*d$zDsb='
 ```

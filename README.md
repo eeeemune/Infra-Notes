@@ -24,6 +24,15 @@
    - 💛 Example
 
 ## Kubernetes
+### [How to Use Secrets in Kubernetes]([Kubernetes]%20How%20to%20Use%20Secrets%20in%20Kubernetes.md)
+- 💚 How to Use Secrets in Kubernetes
+   - 💛 Create a Secret
+   - 💛 Check The Secret
+      - 🤍 List Up Secrets
+      - 🤍 See The Value for Secret
+   - 💛 References
+
+
 ### [1. Kubernetes Clusters]([Kubernetes]%201.%20Kubernetes%20Clusters.md)
 - 💚 Objectives
 - 💚 Control Plane

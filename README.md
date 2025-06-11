@@ -24,8 +24,31 @@
    - 💛 Example
 
 ## Kubernetes
+### [How to Use Secrets in Kubernetes](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20How%20to%20Use%20Secrets%20in%20Kubernetes.md)
+- 💚 How to Use Secrets in Kubernetes
+   - 💛 Create a Secret
+   - 💛 Check The Secret
+      - 🤍 List Up Secrets
+      - 🤍 See The Value for Secret
+   - 💛 References
+
+
 ### [How to Use Secrets in Kubernetes]([Kubernetes]%20How%20to%20Use%20Secrets%20in%20Kubernetes.md)
 - 💚 How to Use Secrets in Kubernetes
+   - 💛 Create a Secret
+   - 💛 Check The Secret
+      - 🤍 List Up Secrets
+      - 🤍 See The Value for Secret
+   - 💛 References
+
+- 💚 How to Use Secrets in Kubernetes
+- 💚 How to Use Secrets in Kubernetes
+   - 💛 Create a Secret
+   - 💛 Check The Secret
+      - 🤍 List Up Secrets
+      - 🤍 See The Value for Secret
+   - 💛 References
+
    - 💛 Create a Secret
    - 💛 Check The Secret
       - 🤍 List Up Secrets

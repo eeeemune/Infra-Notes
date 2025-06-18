@@ -121,3 +121,16 @@
    - 💛 How Harbor fits with Helm and OCI
    - 💛 Typical Use Cases
    - 💛 References
+## Others
+### [How VPN Works](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20VPN%20Works.md)
+- 💚 How VPN Works?
+   - 💛 What is a VPN?
+   - 💛 Why use a VPN?
+   - 💛 How VPN changes network behavior
+      - 🤍 Networking Concepts Involved
+   - 💛 Types of VPNs
+   - 💛 What gets affected?
+   - 💛 Common VPN Protocols
+   - 💛 What does encrypted mean?
+   - 💛 Common Use Cases
+   - 💛 References

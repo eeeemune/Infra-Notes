@@ -134,3 +134,13 @@
    - 💛 What does encrypted mean?
    - 💛 Common Use Cases
    - 💛 References
+## Network
+### [What is NAT](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Network]%20What%20is%20NAT.md)
+- 💚 What is NAT?
+   - 💛 NAT = Network Address Translation
+   - 💛 Why do we need NAT?
+   - 💛 How does it work?
+      - 🤍 Simple Example
+   - 💛 Types of NAT
+   - 💛 Where is NAT used?
+   - 💛 References

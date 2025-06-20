@@ -135,6 +135,16 @@
    - 💛 Common Use Cases
    - 💛 References
 ## Network
+### [How to Set Up VPN with Wireguard](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Network]%20How%20to%20Set%20Up%20VPN%20with%20Wireguard.md)
+- 💚 How to Set Up VPN with Wireguard
+   - 💛 Install Wireguard
+   - 💛 Generate keys on each machine
+   - 💛 Set Up Server
+- Client 1
+- Client 2
+   - 💛 Set Up Client
+
+
 ### [What is NAT](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Network]%20What%20is%20NAT.md)
 - 💚 What is NAT?
    - 💛 NAT = Network Address Translation

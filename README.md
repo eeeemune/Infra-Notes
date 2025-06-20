@@ -154,3 +154,13 @@
    - 💛 Types of NAT
    - 💛 Where is NAT used?
    - 💛 References
+## Linux
+### [How to Create a New User for SSH](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Linux]%20How%20to%20Create%20a%20New%20User%20for%20SSH.md)
+- 💚 How to Create a New User for SSH
+   - 💛 1. Add the User
+   - 💛 2. Add User to  Group (optional)
+   - 💛 3. Create  Folder
+   - 💛 4. Add Public SSH Key
+   - 💛 5. Test the Login
+      - 🤍 Example
+   - 💛 References

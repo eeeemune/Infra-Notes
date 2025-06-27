@@ -174,3 +174,12 @@
    - 💛 5. Test the Login
       - 🤍 Example
    - 💛 References
+## GCP
+### [How to Create OAuth Client](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GCP]%20How%20to%20Create%20OAuth%20Client.md)
+- 💚 How to Create OAuth Client
+   - 💛 Reference
+   - 💛 Create OAuth Client
+      - 🤍 Go to Google Auth Platform → Clients Tab
+      - 🤍 Create Client
+   - 💛 Save Auth Information
+      - 🤍 Download Auth JSON

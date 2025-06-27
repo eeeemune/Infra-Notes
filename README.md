@@ -155,6 +155,16 @@
    - 💛 Where is NAT used?
    - 💛 References
 ## Linux
+### [How to Get My IP on Linux](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Linux]%20How%20to%20Get%20My%20IP%20on%20Linux.md)
+- 💚 How to Get My IP on Linux
+   - 💛 Public
+      - 🤍 IPv6
+- 2603:3024:269:2200::bb22
+      - 🤍 IPv4
+   - 💛 Private
+- 10.1.10.198
+
+
 ### [How to Create a New User for SSH](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Linux]%20How%20to%20Create%20a%20New%20User%20for%20SSH.md)
 - 💚 How to Create a New User for SSH
    - 💛 1. Add the User

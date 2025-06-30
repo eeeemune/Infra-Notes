@@ -155,6 +155,11 @@
    - 💛 Where is NAT used?
    - 💛 References
 ## Linux
+### [Setting the Root Password for the First Time](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Linux]%20Setting%20the%20Root%20Password%20for%20the%20First%20Time.md)
+- 💚 Setting the Root Password for the First Time
+   - 💛 Step-by-Step
+
+
 ### [How to Get My IP on Linux](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Linux]%20How%20to%20Get%20My%20IP%20on%20Linux.md)
 - 💚 How to Get My IP on Linux
    - 💛 Public

@@ -1,5 +1,17 @@
 # Contents
 ## Docker
+### [How to Check Environment Variables in a Docker Container](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20How%20to%20Check%20Environment%20Variables%20in%20a%20Docker%20Container.md)
+- 💚 How to Check Environment Variables in a Docker Container
+   - 💛 1. While Running a Container
+      - 🤍 Option A: Use ‘docker exec’
+      - 🤍 Option B: Use a Shell
+- or
+- or
+   - 💛 2. When Creating a Container
+   - 💛 3. From ‘docker inspect’
+   - 💛 References
+
+
 ### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)
 - 💚 OCI (Open Container Images) and Registries
    - 💛 What is OCI?

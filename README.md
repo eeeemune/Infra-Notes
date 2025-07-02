@@ -17,6 +17,20 @@
    - 💛 Sign in Docker by AWS Profile
 - 💚 Reference
 ## GitHubActions
+### [How to Use git diff Command](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20Use%20git%20diff%20Command.md)
+- 💚 How to Use git diff Command
+   - 💛 What does it do?
+   - 💛 Common Usages
+      - 🤍 Show unstaged changes (what you've edited but not added)
+      - 🤍 Show staged changes (what you've added with )
+      - 🤍 Show everything (staged + unstaged)
+   - 💛 Compare Between Branches
+   - 💛 Compare Between Commits
+   - 💛 See Only File Names (not full diff)
+   - 💛 Compare with Remote Branch
+   - 💛 References
+
+
 ### [GitHub Action Runner]([GitHubActions]%20GitHub%20Action%20Runner.md)
 - 💚 What is the ‘**runner’**?
    - 💛 GitHub Actions Runner

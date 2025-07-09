@@ -133,6 +133,15 @@
    - 💛 Helm Workflow
    - 🤍 Summary
 ## Harbor
+### [How to Check Harbor Connection](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Harbor]%20How%20to%20Check%20Harbor%20Connection.md)
+- 💚 How to Check Harbor Connection
+   - 💛 Background
+   - 💛 How to check
+      - 🤍 Command
+      - 🤍 Succeed
+      - 🤍 Failure
+
+
 ### [What is Harbor]([Harbor]%20What%20is%20Harbor.md)
 - 💚 Harbor
    - 💛 What is Harbor?

@@ -223,3 +223,13 @@
       - 🤍 Create Client
    - 💛 Save Auth Information
       - 🤍 Download Auth JSON
+## Python
+### [How to Use requirements in Python](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Python]%20How%20to%20Use%20requirements%20in%20Python.md)
+- 💚 How to Use requirements.txt in Python
+   - 💛 What is requirements.txt?
+   - 💛 Install Packages from requirements.txt
+   - 💛 Create Your Own requirements.txt
+   - 💛 4. Use with Virtual Environments
+   - 💛 Best Practices
+- Web framework
+   - 💛 References

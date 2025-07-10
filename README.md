@@ -29,6 +29,15 @@
    - 💛 Sign in Docker by AWS Profile
 - 💚 Reference
 ## GitHubActions
+### [How to Pull a Specific Branch from a Remote Git Repository](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Git]%20How%20to%20Pull%20a%20Specific%20Branch%20from%20a%20Remote%20Git%20Repository.md)
+- 💚 How to Pull a Specific Branch from a Remote Git Repository
+   - 💛 1. Check Remote Branches
+   - 💛 2. Pull a Specific Branch (first time)
+   - 💛 3. Pull Updates (branch already exists locally)
+   - 💛 Bonus: Just Download Without Switching
+   - 💛 References
+
+
 ### [How to Use git diff Command](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20Use%20git%20diff%20Command.md)
 - 💚 How to Use git diff Command
    - 💛 What does it do?

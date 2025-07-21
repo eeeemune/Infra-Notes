@@ -242,3 +242,15 @@
    - 💛 Best Practices
 - Web framework
    - 💛 References
+## DNS
+### [What does 'Your connection is not private' mean](https://github.com/eeeemune/Infra-Notes/blob/main/-/[DNS]%20What%20does%20'Your%20connection%20is%20not%20private'%20mean.md)
+- 💚 What Does Your Connection is Not Private Mean?
+   - 💛 What Is SSL?
+   - 💛 Why This Error Happens
+      - 🤍 1. Expired or invalid SSL certificate
+      - 🤍 2. Your computer’s date/time is wrong
+      - 🤍 3. Man-in-the-middle (MITM) attack
+      - 🤍 4. Untrusted certificate authority (CA)
+   - 💛 What You See
+   - 💛 Developer Tips
+   - 💛 References

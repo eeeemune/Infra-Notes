@@ -176,6 +176,15 @@
    - 💛 Typical Use Cases
    - 💛 References
 ## Others
+### [How to Connect a Slack App](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20a%20Slack%20App.md)
+- 💚 How to Connect a Slack App
+   - 💛 Create a Slack Incoming Webhook
+   - 💛 Enable Socket Mode
+   - 💛 Add a Coolify Webhook Trigger
+      - 🤍 Configure a Webhook
+      - 🤍 Set the Webhook to Your Application
+
+
 ### [How VPN Works](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20VPN%20Works.md)
 - 💚 How VPN Works?
    - 💛 What is a VPN?

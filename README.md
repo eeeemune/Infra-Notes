@@ -252,6 +252,22 @@
    - 💛 Save Auth Information
       - 🤍 Download Auth JSON
 ## Python
+### [How to Use Poetry](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Python]%20How%20to%20Use%20Poetry.md)
+- 💚 How to Use Poetry
+   - 💛 What is Poetry?
+   - 💛 Quick Start
+      - 🤍 1. Install Poetry
+      - 🤍 2. Create a New Project
+      - 🤍 3. Add Dependencies
+      - 🤍 4. Install Everything (existing project)
+      - 🤍 5. Run Commands Inside Environment
+      - 🤍 6. Update Dependencies
+      - 🤍 7. Check Dependency Graph
+      - 🤍 8. Publish Your Package
+   - 💛 Useful Extras
+   - 💛 Workflow Example
+
+
 ### [How to Use requirements in Python](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Python]%20How%20to%20Use%20requirements%20in%20Python.md)
 - 💚 How to Use requirements.txt in Python
    - 💛 What is requirements.txt?

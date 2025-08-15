@@ -39,6 +39,16 @@
    - 💛 Sign in Docker by AWS Profile
 - 💚 Reference
 ## GitHubActions
+### [How to set a team as Auto-Assigned Reviewers](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20set%20a%20team%20as%20Auto-Assigned%20Reviewers.md)
+   - 💚 How to set a team as Auto-Assigned Reviewers
+      - 💛 Make Sure You Have a GitHub Team
+      - 💛 Create or Edit a  File
+- All  files will be reviewed by the backend team
+- All files in the frontend folder will be reviewed by the frontend team
+      - 💛 Enable CODEOWNERS Auto-Assignment in Settings
+      - 💛 Things to Note
+
+
 ### [How to Pull a Specific Branch from a Remote Git Repository](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Git]%20How%20to%20Pull%20a%20Specific%20Branch%20from%20a%20Remote%20Git%20Repository.md)
 - 💚 How to Pull a Specific Branch from a Remote Git Repository
    - 💛 1. Check Remote Branches

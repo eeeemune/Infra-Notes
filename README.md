@@ -299,3 +299,19 @@
    - 💛 What You See
    - 💛 Developer Tips
    - 💛 References
+## Terraform
+### [Terraform Tutorial](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Terraform]%20Terraform%20Tutorial.md)
+- 💚 Terraform Tutorial
+   - 💛 What is Terraform?
+      - 🤍 Example
+   - 💛 Terraform Workflow
+   - 💛 Core Concepts
+   - 💛 Variables & Outputs
+      - 🤍 variables.tf
+      - 🤍 main.tf
+      - 🤍 outputs.tf
+   - 💛 State Management
+   - 💛 Modules
+      - 🤍 Example
+   - 💛 Best Practices
+   - 💛 References

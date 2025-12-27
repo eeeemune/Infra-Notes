@@ -79,6 +79,77 @@
    - 💛 Example
 
 ## Kubernetes
+### [ECS to EKS Migration Guide](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20ECS%20to%20EKS%20Migration%20Guide.md)
+- 💚 ECS to EKS Migration Guide
+   - 💛 Before You Start…
+      - 🤍 Essential Concept
+      - 🤍 The Big Picture
+      - 🤍 Overal Structure
+   - 💛 IAM Setup
+      - 🤍 Why Do We Need IAM Roles?
+      - 🤍 Cluster Role
+- iam.tf
+- Create the role
+- Attach the required policy
+      - 🤍 Node Role
+- Create the role
+- Nodes need THREE policies:
+      - 🤍 User Access
+- Import your IAM user
+- Add yourself to the cluster's access list
+- Give yourself admin permissions
+   - 💛 Creating the EKS Cluster
+      - 🤍 The Cluster Itself
+- cluster.tf
+      - 🤍 Node Groups
+      - 🤍 Essential Add-ons
+- DNS for service discovery (pods find each other by name - like a dns server in K8s)
+- Networking (assigns IPs to pods)
+- Network routing
+- Metrics (needed for auto-scaling)
+   - 💛 Networking & Security Groups
+      - 🤍 Why This Matters?
+      - 🤍 EKS → RDS
+      - 🤍 EKS → Redis(ElastiCache)
+      - 🤍 ALB → EKS Pods
+- First, create a security group for the ALB
+- Then allow ALB to reach EKS nodes
+   - 💛 Load Balancer
+      - 🤍 Create the ALB
+      - 🤍 Create HTTPS Listener
+      - 🤍 Create Target Groups
+      - 🤍 Create Listener Rules
+      - 🤍 Connect ALB to EKS (TargetGroupBinding)
+   - 💛 Managing Secrets
+      - 🤍 Background - The Problem
+      - 🤍 Variable Flows
+      - 🤍 Fetch Secrets from SSM by Terraform
+- Get all parameters under /chartmetric/shared/
+- Get environment-specific parameters
+      - 🤍 Create Kubernetes Secrets
+      - 🤍 Use Secrets in Deployments
+- In your deployment spec:
+- This value will WIN over anything in api-secrets
+- This loads from secrets (but env above takes precedence)
+   - 💛 Deploying Applications
+      - 🤍 Basic Deployment
+      - 🤍 Creating a Service
+      - 🤍 Horizontal Pod Autoscaler (HPA)
+   - 💛 Redis Configuration
+      - 🤍 The Setup
+      - 🤍 Define Redis in Environment Config
+- environments.tf
+      - 🤍 Create Redis Clusters
+- redis.tf
+      - 🤍 Connect Pods with Redis
+- In deployment spec:
+   - 💛 DNS & Traffic Migration
+      - 🤍 How Can We Migrate with Zero-Downtime?
+      - 🤍 Create DNS Records
+      - 🤍 Update CloudFront
+      - 🤍 Attach WAF
+
+
 ### [How to Use Secrets in Kubernetes](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20How%20to%20Use%20Secrets%20in%20Kubernetes.md)
 - 💚 How to Use Secrets in Kubernetes
    - 💛 Create a Secret

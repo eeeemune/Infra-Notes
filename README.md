@@ -273,6 +273,15 @@
    - 💛 Typical Use Cases
    - 💛 References
 ## Others
+### [How to Connect a Slack App](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20a%20Slack%20App.md)
+- 💚 How to Connect a Slack App
+   - 💛 Create a Slack Incoming Webhook
+   - 💛 Enable Socket Mode
+   - 💛 Add a Coolify Webhook Trigger
+      - 🤍 Configure a Webhook
+      - 🤍 Set the Webhook to Your Application
+
+
 ### [How to Get HTTP Certificate](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Get%20HTTP%20Certificate.md)
 - 💚 How to Get HTTP Certificate
    - 💛 Install Nginx and Certbot
@@ -285,6 +294,20 @@
 
 ### [How to Connect a Slack App](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20a%20Slack%20App.md)
 - 💚 How to Connect a Slack App
+   - 💛 Create a Slack Incoming Webhook
+   - 💛 Enable Socket Mode
+   - 💛 Add a Coolify Webhook Trigger
+      - 🤍 Configure a Webhook
+      - 🤍 Set the Webhook to Your Application
+
+- 💚 How to Connect a Slack App
+- 💚 How to Connect a Slack App
+   - 💛 Create a Slack Incoming Webhook
+   - 💛 Enable Socket Mode
+   - 💛 Add a Coolify Webhook Trigger
+      - 🤍 Configure a Webhook
+      - 🤍 Set the Webhook to Your Application
+
    - 💛 Create a Slack Incoming Webhook
    - 💛 Enable Socket Mode
    - 💛 Add a Coolify Webhook Trigger

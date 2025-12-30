@@ -386,3 +386,14 @@
       - 🤍 Example
    - 💛 Best Practices
    - 💛 References
+## AWS
+### [How to connect your terminal to EKS](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20connect%20your%20terminal%20to%20EKS.md)
+- 💚 How to connect your terminal to EKS
+   - 💛 Prerequisites
+      - 🤍 Required tools
+   - 💛 Steps
+      - 🤍 1. Verify AWS access
+      - 🤍 2. Generate ‘kubeconfig’ for EKS
+- Real example
+      - 🤍 3. Select and check current context
+      - 🤍 4. Test

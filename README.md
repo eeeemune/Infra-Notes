@@ -273,6 +273,16 @@
    - 💛 Typical Use Cases
    - 💛 References
 ## Others
+### [How to Get HTTP Certificate](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Get%20HTTP%20Certificate.md)
+- 💚 How to Get HTTP Certificate
+   - 💛 Install Nginx and Certbot
+   - 💛 Configure Nginx as reverse proxy
+- /etc/nginx/sites-available/mcp
+   - 💛 Enable the site
+   - 💛 Obtain SSL certificate
+   - 💛 Enable auto-renual
+
+
 ### [How to Connect a Slack App](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20a%20Slack%20App.md)
 - 💚 How to Connect a Slack App
    - 💛 Create a Slack Incoming Webhook

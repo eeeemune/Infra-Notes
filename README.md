@@ -371,6 +371,17 @@
    - 💛 Developer Tips
    - 💛 References
 ## Terraform
+### [Add a New GitHub Member with Terraform](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Terraform]%20Add%20a%20New%20GitHub%20Member%20with%20Terraform.md)
+- 💚 Add a New GitHub Member with Terraform
+   - 💛 Go to the Files
+- teams.terraform → defines GitHub teams
+- membership.terraform → defines who’s in each team
+   - 💛 Add a New Member
+- membership.tf  
+   - 💛 Apply Terraform
+   - 💛 Commit the Change & Create a PR
+
+
 ### [Terraform Tutorial](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Terraform]%20Terraform%20Tutorial.md)
 - 💚 Terraform Tutorial
    - 💛 What is Terraform?

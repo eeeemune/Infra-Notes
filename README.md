@@ -1,5 +1,14 @@
 # Contents
 ## Docker
+### [How to Run a Command on a Docker Image Stored in AWS ECR](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20How%20to%20Run%20a%20Command%20on%20a%20Docker%20Image%20Stored%20in%20AWS%20ECR.md)
+- 💚 How to Run a Command on a Docker Image Stored in AWS ECR
+   - 💛 Authenticate Docker with ECR
+      - 🤍 Example
+   - 💛 Pull the Image From ECR
+   - 💛 Run the Image With a Command
+   - 💛 Start an Interactive Shell
+
+
 ### [What is Docker Mount](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20What%20is%20Docker%20Mount.md)
 - 💚 What Is Docker Mount?
    - 💛 Basic Syntax

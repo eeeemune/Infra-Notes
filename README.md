@@ -79,6 +79,13 @@
    - 💛 Example
 
 ## Kubernetes
+### [Helm Chart and Release](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Helm%20Chart%20and%20Release.md)
+- 💚 Helm Chart and Release
+   - 💛 What is a **Helm Release**?
+   - 💛 Example
+   - 💛 In Terraform
+
+
 ### [ECS to EKS Migration Guide](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20ECS%20to%20EKS%20Migration%20Guide.md)
 - 💚 ECS to EKS Migration Guide
    - 💛 Before You Start…

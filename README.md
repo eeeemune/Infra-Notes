@@ -429,7 +429,8 @@
 - membership.tf  
    - 💛 Apply Terraform
    - 💛 Commit the Change & Create a PR
-
+## TroubleShootings
+### [docker-entrypoint.sh: exec format error](https://github.com/eeeemune/Infra-Notes/blob/main/-/%5BTroubleShootings%5D%20docker-entrypoint.sh%3A%20exec%20format%20error.md)
 
 ### [Terraform Tutorial](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Terraform]%20Terraform%20Tutorial.md)
 - 💚 Terraform Tutorial

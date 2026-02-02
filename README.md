@@ -88,6 +88,19 @@
    - 💛 Example
 
 ## Kubernetes
+### [What is Karpenter](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20What%20is%20Karpenter.md)
+- 💚 What is Karpenter?
+   - 💛 Karpenter
+   - 💛 Why Do We Need It?
+   - 💛 How It Works
+      - 🤍 Flow
+   - 💛 What Makes Karpenter Special?
+      - 🤍 Traditional Cluster Autoscaler
+      - 🤍 Karpenter
+   - 💛 Simple Config Example
+   - 💛 References
+
+
 ### [Helm Chart and Release](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Helm%20Chart%20and%20Release.md)
 - 💚 Helm Chart and Release
    - 💛 What is a **Helm Release**?

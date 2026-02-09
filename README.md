@@ -48,6 +48,22 @@
    - 💛 Sign in Docker by AWS Profile
 - 💚 Reference
 ## GitHubActions
+### [How to Configure GitHub on Your Terminal](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20Configure%20GitHub%20on%20Your%20Terminal.md)
+- 💚 How to Configure Git on Your Terminal
+   - 💛 1. Set Your Identity (Required)
+   - 💛 2. Check Your Config
+   - 💛 3. Set Credential Helper (avoid typing password/PAT every time)
+      - 🤍 macOS
+      - 🤍 Linux (simple store)
+   - 💛 4. Set Editor (Optional)
+      - 🤍 Vim
+   - 💛 5. Enable Colored Output (Pretty UI)
+   - 💛 7. Setup SSH Instead of Password
+- Hi eeeemune! You've successfully authenticated, but GitHub does not provide shell access.
+   - 💛 Example Full Setup (Quick Copy)
+   - 💛 References
+
+
 ### [How to set a team as Auto-Assigned Reviewers](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20set%20a%20team%20as%20Auto-Assigned%20Reviewers.md)
    - 💚 How to set a team as Auto-Assigned Reviewers
       - 💛 Make Sure You Have a GitHub Team

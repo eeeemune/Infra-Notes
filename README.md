@@ -302,6 +302,16 @@
    - 💛 Typical Use Cases
    - 💛 References
 ## Others
+### [Data Driven Design Pattern](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20Data%20Driven%20Design%20Pattern.md)
+- 💚 Data-Driven Design Pattern
+   - 💛 What is Data-Driven Design Pattern?
+   - 💛 Why Use It?
+   - 💛 Example
+      - 🤍 Traditional (Hard-coded)
+      - 🤍 Data-Driven
+   - 💛 Summary
+
+
 ### [How to Connect a Slack App](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20a%20Slack%20App.md)
 - 💚 How to Connect a Slack App
    - 💛 Create a Slack Incoming Webhook

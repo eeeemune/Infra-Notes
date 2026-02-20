@@ -497,3 +497,20 @@
 - Real example
       - 🤍 3. Select and check current context
       - 🤍 4. Test
+## Terrraform
+### [Terraform Module](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Terrraform]%20Terraform%20Module.md)
+- 💚 Terraform Module
+   - 💛 What is a Module?
+   - 💛 Basic Structure
+   - 💛 Example
+      - 🤍 Configure the Module
+- variables.tf (input)
+- main.tf
+- outputs.tf (output)
+      - 🤍 Use the Module
+   - 💛 Module Source Types
+      - 🤍 Local Module
+      - 🤍 GitHub Module
+      - 🤍 Terraform Registry
+   - 💛 Best Practices
+   - 💛 References

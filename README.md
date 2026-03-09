@@ -1,5 +1,19 @@
 # Contents
 ## Docker
+### [Docker Multi Stage Build](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20Docker%20Multi%20Stage%20Build.md)
+- 💚 Docker Multi Stage Build
+   - 💛 What is a Dockerfile Stage?
+   - 💛 Basic Idea
+   - 💛 Basic Syntax
+- Builder Stage
+- Runner Stage
+   - 💛 How It Works
+   - 💛 Example (Python)
+   - 💛 Why Multi-Stage Builds Are Important
+   - 💛 Target a Specific Stage
+   - 💛 References
+
+
 ### [How to Run a Command on a Docker Image Stored in AWS ECR](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20How%20to%20Run%20a%20Command%20on%20a%20Docker%20Image%20Stored%20in%20AWS%20ECR.md)
 - 💚 How to Run a Command on a Docker Image Stored in AWS ECR
    - 💛 Authenticate Docker with ECR

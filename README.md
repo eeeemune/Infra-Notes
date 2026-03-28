@@ -316,6 +316,16 @@
    - 💛 Typical Use Cases
    - 💛 References
 ## Others
+### [How to Connect Your EKS Cluster with ClickHouse Cloud](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20to%20Connect%20Your%20EKS%20Cluster%20with%20ClickHouse%20Cloud.md)
+- 💚 How to Connect Your Cluster with ClickHouse Cloud
+   - 💛 Get Credentials
+      - 🤍 Go to ‘Connect’ Tab
+      - 🤍 Get Credentials
+   - 💛 Allow EKS IP Access
+      - 🤍 Go to Settings → IP Access List
+      - 🤍 Add Your Node IP Address
+
+
 ### [Data Driven Design Pattern](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20Data%20Driven%20Design%20Pattern.md)
 - 💚 Data-Driven Design Pattern
    - 💛 What is Data-Driven Design Pattern?

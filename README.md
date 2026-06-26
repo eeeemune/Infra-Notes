@@ -117,6 +117,16 @@
    - 💛 Where does the **runner** live?
    - 💛 Example
 
+
+### [How to post a note](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20post%20a%20note.md)
+- 💚 How to post a note
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 How does it work?
+      - 🤍 Sensitivity gate
+      - 🤍 Example
+   - 💛 References
+
 ## Kubernetes
 ### [What is Karpenter](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20What%20is%20Karpenter.md)
 - 💚 What is Karpenter?

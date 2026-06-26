@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '-/*.md'
-      - '!README.md'
+  workflow_dispatch: {}
 
 jobs:
   update-readme:
@@ -16,160 +16,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v41
-        with:
-          files: |
-            -/*.md
-            !README.md
-
-      - name: Process changed files
-        id: process
-        run: |
-          # Get the list of changed files
-          CHANGED_FILES="${{ steps.changed-files.outputs.all_changed_files }}"
-          
-          echo "CHANGED_FILES: $CHANGED_FILES"
-          
-          # Read current README
-          README_CONTENT=$(cat README.md)
-          
-          # Process the file
-          file="$CHANGED_FILES"
-          if [ ! -f "$file" ]; then
-            echo "Warning: File $file does not exist"
-            exit 1
-          fi
-          
-          # Extract title from filename (remove .md and any category prefix)
-          filename=$(echo "$file" | awk -F'/' '{print $NF}')  # Get just the filename part
-          TITLE=$(echo "$filename" | sed -E 's/\.md$//' | sed -E 's/^\[[^]]+\]\s*//')
-          
-          if [ -z "$TITLE" ]; then
-            echo "Warning: Could not extract title from filename: $file"
-            exit 1
-          fi
-          
-          # Extract category from filename (format: [Category]...)
-          CATEGORY=$(echo "$filename" | sed -n 's/.*\[\([^]]*\)\].*/\1/p')
-          
-          if [ -z "$CATEGORY" ]; then
-            echo "Warning: Could not determine category from filename: $file"
-            exit 1
-          fi
-          
-          # Create new link
-          LINK_BASE="https://github.com/eeeemune/Infra-Notes/blob/main/-/"
-          ENCODED_FILENAME=$(echo "[$CATEGORY] $TITLE.md" | sed 's/ /%20/g')
-          NEW_LINK="### [$TITLE](https://github.com/eeeemune/Infra-Notes/blob/main/-/$ENCODED_FILENAME)\n"
-          
-          # Find the appropriate section
-          CATEGORY_PATTERN="## $CATEGORY"
-          if [[ "$README_CONTENT" == *"$CATEGORY_PATTERN"* ]]; then
-            # Insert new link after the category header
-            README_CONTENT=$(echo "$README_CONTENT" | sed "/$CATEGORY_PATTERN/a\\$NEW_LINK")
-          else
-            # Create new category section
-            NEW_SECTION="\n## $CATEGORY\n$NEW_LINK"
-            # Add new section at the end of the file
-            README_CONTENT="$README_CONTENT$NEW_SECTION"
-          fi
-          
-          # Save the current state for the next step
-          {
-            echo "file<<EOF"
-            echo "$file"
-            echo "EOF"
-            echo "new_link<<EOF"
-            echo "$NEW_LINK"
-            echo "EOF"
-            echo "readme_content<<EOF"
-            echo "$README_CONTENT"
-            echo "EOF"
-            echo "title<<EOF"
-            echo "$TITLE"
-            echo "EOF"
-          } >> $GITHUB_OUTPUT
-
-      - name: Transform markdown content
-        id: transform
-        run: |
-          file="${{ steps.process.outputs.file }}"
-          NEW_LINK="${{ steps.process.outputs.new_link }}"
-          NEW_LINK_RAW="${{ steps.process.outputs.title }}"
-
-
-          README_CONTENT="${{ steps.process.outputs.readme_content }}"
-          
-          # Transform the content of the markdown file
-          if [ -f "$file" ]; then
-            # Initialize transformed content
-            TRANSFORMED_CONTENT=""
-            
-            # Process the file line by line
-            while IFS= read -r line || [ -n "$line" ]; do
-              if [[ $line =~ ^### ]]; then
-                # Level 3 heading -> 6 spaces + bullet
-                TRANSFORMED_CONTENT+="      - ${line#*### }\n"
-              elif [[ $line =~ ^## ]]; then
-                # Level 2 heading -> 3 spaces + bullet
-                TRANSFORMED_CONTENT+="   - ${line#*## }\n"
-              elif [[ $line =~ ^# ]]; then
-                # Level 1 heading -> bullet
-                TRANSFORMED_CONTENT+="- ${line#*# }\n"
-              fi
-            done < "$file"
-            
-            # echo "TRANSFORMED_CONTENT: $TRANSFORMED_CONTENT"
-            
-            # Append transformed content after the link
-            # Create a temporary file for the transformed content
-            echo -e "$TRANSFORMED_CONTENT" > transformed_content.txt
-            
-            echo "NEW_LINK_RAW: $NEW_LINK_RAW"
-            echo "NEW_LINK: $NEW_LINK"
-
-            GOGO=$(echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
-            echo $GOGO
-
-            # Use the temporary file to append content
-            # echo -e "$README_CONTENT"
-            # echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/$NEW_LINK_RAW/r transformed_content.txt""
-            # echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/"([Docker]%20OCI%20and%20Registries.md)"/r transformed_content.txt""
-            # echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/"[OCI and Registries]"/r transformed_content.txt""
-            # echo -e "### [OCI and Registries]([Docker]%20OCI%20and%20Registries.md)" | sed "/"([Docker]%20OCI%20and%20Registries.md)"/r transformed_content.txt""
-            # echo -e "$README_CONTENT" > readme_content.txt
-            README_CONTENT=$(echo -e "$README_CONTENT" | sed "/$NEW_LINK_RAW/r transformed_content.txt")
-
-            # echo "README_CONTENT: $README_CONTENT"
-            
-            # Clean upcon
-            # rm transformed_content.txt
-          fi
-          
-          # Save the final README content
-          {
-            echo -e "readme_content<<EOF"
-            echo -e "$README_CONTENT"
-            echo -e "EOF"
-          } >> $GITHUB_OUTPUT
-
-      - name: Update README
-        run: |
-          echo "${{ steps.transform.outputs.readme_content }}" 
-          echo "${{ steps.transform.outputs.readme_content }}" > README.md
-
-      - name: Print README
-        run: |
-          cat README.md
+      - name: Rebuild README index
+        run: bash .github/scripts/build-readme.sh
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "docs: update README with new links"
+          commit_message: "docs: rebuild README index"
           file_pattern: README.md
           branch: main

@@ -62,6 +62,17 @@
    - 💛 Sign in Docker by AWS Profile
 - 💚 Reference
 ## GitHubActions
+### [How to post a note](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20post%20a%20note.md)
+- 💚 How to post a note
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 How does it work?
+      - 🤍 Sensitivity gate
+      - 🤍 Example
+- write the note once; it routes itself to Notion and (if safe) GitHub
+   - 💛 References
+
+
 ### [How to Configure GitHub on Your Terminal](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20Configure%20GitHub%20on%20Your%20Terminal.md)
 - 💚 How to Configure Git on Your Terminal
    - 💛 1. Set Your Identity (Required)
@@ -120,6 +131,24 @@
 
 ### [How to post a note](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20post%20a%20note.md)
 - 💚 How to post a note
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 How does it work?
+      - 🤍 Sensitivity gate
+      - 🤍 Example
+- write the note once; it routes itself to Notion and (if safe) GitHub
+   - 💛 References
+
+- 💚 How to post a note
+- 💚 How to post a note
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 How does it work?
+      - 🤍 Sensitivity gate
+      - 🤍 Example
+- write the note once; it routes itself to Notion and (if safe) GitHub
+   - 💛 References
+
    - 💛 What is it?
    - 💛 Why do we need it?
    - 💛 How does it work?

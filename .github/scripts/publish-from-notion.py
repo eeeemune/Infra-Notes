@@ -29,10 +29,10 @@ SENSITIVE = re.compile(
 )
 
 
-def notion(method, path, body=None, token=None):
+def notion(method, path, body=None, token=None, ver=None):
     req = urllib.request.Request(
         "https://api.notion.com/v1" + path, method=method,
-        headers={"Authorization": "Bearer " + (token or TOKEN), "Notion-Version": NVER,
+        headers={"Authorization": "Bearer " + (token or TOKEN), "Notion-Version": ver or NVER,
                  "Content-Type": "application/json"},
         data=json.dumps(body).encode() if body is not None else None,
     )
@@ -231,17 +231,30 @@ def build_blocks(page_id):
     return [k for k in (to_block(b) for b in children(page_id)) if k][:100]
 
 
-def cm_title_prop():
-    db = notion("GET", f"/databases/{CM_DATABASE_ID}", token=CM_TOKEN)
-    for name, p in db["properties"].items():
+CM_VER = "2025-09-03"  # data-source API (the chartmetric DB uses the newer model)
+
+
+def cm_data_source():
+    db = notion("GET", f"/databases/{CM_DATABASE_ID}", token=CM_TOKEN, ver=CM_VER)
+    ds = db.get("data_sources") or []
+    if not ds:
+        raise SystemExit("chartmetric DB exposes no data sources to this integration "
+                         "(share the source database itself, not a linked view)")
+    return ds[0]["id"]
+
+
+def cm_title_prop(ds_id):
+    info = notion("GET", f"/data_sources/{ds_id}", token=CM_TOKEN, ver=CM_VER)
+    for name, p in info.get("properties", {}).items():
         if p.get("type") == "title":
             return name
-    raise SystemExit("chartmetric DB has no title property")
+    raise SystemExit("chartmetric data source has no title property")
 
 
-def cm_exists(title_prop, title):
+def cm_exists(ds_id, title_prop, title):
     body = {"filter": {"property": title_prop, "title": {"equals": title}}, "page_size": 1}
-    return bool(notion("POST", f"/databases/{CM_DATABASE_ID}/query", body, token=CM_TOKEN)["results"])
+    res = notion("POST", f"/data_sources/{ds_id}/query", body, token=CM_TOKEN, ver=CM_VER)
+    return bool(res["results"])
 
 
 def mirror_company():
@@ -252,23 +265,24 @@ def mirror_company():
     if not pages:
         print("No notes flagged for company mirror.")
         return
-    title_prop = cm_title_prop()
+    ds_id = cm_data_source()
+    title_prop = cm_title_prop(ds_id)
     for pg in pages:
         title = prop_text(pg["properties"], "Name")
         if not title:
             print("skip: empty Name")
             continue
-        if cm_exists(title_prop, title):
+        if cm_exists(ds_id, title_prop, title):
             print(f"company: '{title}' already exists; skipping (delete it there to re-mirror).")
             untick(pg["id"], "Publish to Company")
             continue
         body = {
-            "parent": {"database_id": CM_DATABASE_ID},
+            "parent": {"type": "data_source_id", "data_source_id": ds_id},
             "icon": {"type": "emoji", "emoji": "\U0001f49a"},
             "properties": {title_prop: {"title": [{"type": "text", "text": {"content": title}}]}},
             "children": build_blocks(pg["id"]),
         }
-        res = notion("POST", "/pages", body, token=CM_TOKEN)
+        res = notion("POST", "/pages", body, token=CM_TOKEN, ver=CM_VER)
         untick(pg["id"], "Publish to Company")
         print(f"company mirrored: {title} -> {res.get('url')}")
 

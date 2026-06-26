@@ -18,4 +18,5 @@ jobs:
       - name: Publish notes ticked "Publish to GitHub"
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_CHARTMETRIC_TOKEN: ${{ secrets.NOTION_CHARTMETRIC_TOKEN }}
         run: python3 .github/scripts/publish-from-notion.py

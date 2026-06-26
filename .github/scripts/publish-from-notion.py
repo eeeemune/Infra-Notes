@@ -1,29 +1,25 @@
 #!/usr/bin/env python3
-"""Publish Notion notes flagged 'Publish to GitHub' into this repo.
+"""Publish / mirror Notion notes flagged in the Chartmetric Notes database.
 
-Flow: query the Chartmetric Notes database for pages whose 'Publish to GitHub'
-checkbox is ticked, render each to markdown, refuse anything with internal markers
-(public repo, fail-safe), write -/[Category] Title.md, rebuild the README index in
-the same commit, push, then untick the box on each published page.
+Two independent checkbox triggers on a note:
+  - 'Publish to GitHub'  -> render to markdown, run the sensitivity guard (public
+    repo, fail-safe), write -/[Category] Title.md, rebuild README, push, untick.
+  - 'Publish to Company' -> copy the note as a page in the chartmetric (company)
+    Notion database, then untick. Private workspace, so no guard.
 
-Self-contained on purpose: an Action push with the default GITHUB_TOKEN does not
-trigger other workflows, so we rebuild README here instead of relying on it.
-
-No-ops cleanly when NOTION_TOKEN is absent, so the schedule stays quiet until the
-repo secret is added.
+Notes are READ from the eemune workspace with NOTION_TOKEN. The company copy is
+WRITTEN to chartmetric with NOTION_CHARTMETRIC_TOKEN. Each path no-ops when its
+token(s) are absent, so the schedule stays quiet until secrets are added.
 """
 import json, os, re, subprocess, sys, urllib.error, urllib.request
 
 TOKEN = os.environ.get("NOTION_TOKEN", "").strip()
+CM_TOKEN = os.environ.get("NOTION_CHARTMETRIC_TOKEN", "").strip()
 DATABASE_ID = os.environ.get("NOTES_DATABASE_ID", "2503f66f52258047b727c219b03e4a1a")
+CM_DATABASE_ID = os.environ.get("CHARTMETRIC_DATABASE_ID", "251ad25273268088b7e1ffd4f913ce1c")
 NOTE_DIR = "-"
 NVER = "2022-06-28"
 
-if not TOKEN:
-    print("NOTION_TOKEN not set; nothing to do (add the repo secret to enable).")
-    sys.exit(0)
-
-# Same fail-safe guard as publish-github.sh: refuse internal markers on a public repo.
 SENSITIVE = re.compile(
     r"arn:aws:|897744604563|[0-9]{12}|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
     r"10\.[0-9]+\.[0-9]+\.[0-9]+|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|"
@@ -33,10 +29,10 @@ SENSITIVE = re.compile(
 )
 
 
-def notion(method, path, body=None):
+def notion(method, path, body=None, token=None):
     req = urllib.request.Request(
         "https://api.notion.com/v1" + path, method=method,
-        headers={"Authorization": "Bearer " + TOKEN, "Notion-Version": NVER,
+        headers={"Authorization": "Bearer " + (token or TOKEN), "Notion-Version": NVER,
                  "Content-Type": "application/json"},
         data=json.dumps(body).encode() if body is not None else None,
     )
@@ -62,10 +58,10 @@ def rich(texts):
     return "".join(out)
 
 
-def query_flagged():
+def query_flagged(prop):
     results, cursor = [], None
     while True:
-        body = {"filter": {"property": "Publish to GitHub", "checkbox": {"equals": True}}, "page_size": 50}
+        body = {"filter": {"property": prop, "checkbox": {"equals": True}}, "page_size": 50}
         if cursor:
             body["start_cursor"] = cursor
         data = notion("POST", f"/databases/{DATABASE_ID}/query", body)
@@ -134,16 +130,19 @@ def first_tag(props):
     return ms[0]["name"] if ms else ""
 
 
-def untick(page_id):
-    notion("PATCH", f"/pages/{page_id}", {"properties": {"Publish to GitHub": {"checkbox": False}}})
+def untick(page_id, prop):
+    notion("PATCH", f"/pages/{page_id}", {"properties": {prop: {"checkbox": False}}})
 
 
-def main():
-    pages = query_flagged()
-    if not pages:
-        print("No notes flagged for publish.")
+# --- GitHub publish (public repo) -------------------------------------------------
+def publish_github():
+    if not TOKEN:
+        print("NOTION_TOKEN not set; skipping GitHub publish.")
         return
-
+    pages = query_flagged("Publish to GitHub")
+    if not pages:
+        print("No notes flagged for GitHub.")
+        return
     subprocess.run(["git", "config", "user.name", "eeeemune"], check=True)
     subprocess.run(["git", "config", "user.email", "eeeemune@gmail.com"], check=True)
 
@@ -160,7 +159,7 @@ def main():
         hit = SENSITIVE.search(content)
         if hit:
             print(f"REFUSED (sensitive): '{title}' matched {hit.group()!r}; unticking, not publishing.")
-            untick(pg["id"])
+            untick(pg["id"], "Publish to GitHub")
             continue
         target = os.path.join(NOTE_DIR, f"[{category}] {title}.md")
         os.makedirs(NOTE_DIR, exist_ok=True)
@@ -170,25 +169,113 @@ def main():
         published.append((pg["id"], title, category))
         print(f"staged: {target}")
 
-    if not published:
-        print("Nothing to commit.")
+    if published:
+        subprocess.run(["bash", ".github/scripts/build-readme.sh"], check=True)
+        subprocess.run(["git", "add", "--", "README.md"], check=True)
+        if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode != 0:
+            msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"
+            subprocess.run(["git", "commit", "-m", msg], check=True)
+            subprocess.run(["git", "push"], check=True)
+            print("committed and pushed.")
+        else:
+            print("no content change; nothing to commit.")
+        for pid, title, _ in published:
+            untick(pid, "Publish to GitHub")
+            print(f"published & unticked: {title}")
+
+
+# --- Company Notion mirror (private workspace, no guard) --------------------------
+def to_richtext(read_list):
+    out = []
+    for rt in read_list or []:
+        txt = rt.get("plain_text", "")
+        if not txt:
+            continue
+        obj = {"type": "text", "text": {"content": txt[:2000]}}
+        if rt.get("href"):
+            obj["text"]["link"] = {"url": rt["href"]}
+        ann = rt.get("annotations") or {}
+        keep = {k: True for k in ("bold", "italic", "strikethrough", "underline", "code") if ann.get(k)}
+        if ann.get("color") and ann["color"] != "default":
+            keep["color"] = ann["color"]
+        if keep:
+            obj["annotations"] = keep
+        out.append(obj)
+    return out
+
+
+TEXTY = ("heading_1", "heading_2", "heading_3", "paragraph",
+         "bulleted_list_item", "numbered_list_item", "quote")
+
+
+def to_block(b):
+    t = b["type"]
+    d = b.get(t, {})
+    if t == "divider":
+        return {"object": "block", "type": "divider", "divider": {}}
+    if t == "code":
+        return {"object": "block", "type": "code", "code": {
+            "rich_text": to_richtext(d.get("rich_text")),
+            "language": d.get("language") or "plain text"}}
+    if t in TEXTY:
+        nb = {"object": "block", "type": t, t: {"rich_text": to_richtext(d.get("rich_text"))}}
+        if b.get("has_children") and t in ("bulleted_list_item", "numbered_list_item"):
+            kids = [k for k in (to_block(c) for c in children(b["id"])) if k]
+            if kids:
+                nb[t]["children"] = kids[:100]
+        return nb
+    return None
+
+
+def build_blocks(page_id):
+    return [k for k in (to_block(b) for b in children(page_id)) if k][:100]
+
+
+def cm_title_prop():
+    db = notion("GET", f"/databases/{CM_DATABASE_ID}", token=CM_TOKEN)
+    for name, p in db["properties"].items():
+        if p.get("type") == "title":
+            return name
+    raise SystemExit("chartmetric DB has no title property")
+
+
+def cm_exists(title_prop, title):
+    body = {"filter": {"property": title_prop, "title": {"equals": title}}, "page_size": 1}
+    return bool(notion("POST", f"/databases/{CM_DATABASE_ID}/query", body, token=CM_TOKEN)["results"])
+
+
+def mirror_company():
+    if not (TOKEN and CM_TOKEN):
+        print("NOTION_CHARTMETRIC_TOKEN (or NOTION_TOKEN) not set; skipping company mirror.")
         return
+    pages = query_flagged("Publish to Company")
+    if not pages:
+        print("No notes flagged for company mirror.")
+        return
+    title_prop = cm_title_prop()
+    for pg in pages:
+        title = prop_text(pg["properties"], "Name")
+        if not title:
+            print("skip: empty Name")
+            continue
+        if cm_exists(title_prop, title):
+            print(f"company: '{title}' already exists; skipping (delete it there to re-mirror).")
+            untick(pg["id"], "Publish to Company")
+            continue
+        body = {
+            "parent": {"database_id": CM_DATABASE_ID},
+            "icon": {"type": "emoji", "emoji": "\U0001f49a"},
+            "properties": {title_prop: {"title": [{"type": "text", "text": {"content": title}}]}},
+            "children": build_blocks(pg["id"]),
+        }
+        res = notion("POST", "/pages", body, token=CM_TOKEN)
+        untick(pg["id"], "Publish to Company")
+        print(f"company mirrored: {title} -> {res.get('url')}")
 
-    # Rebuild the index in the same commit (the token push won't trigger the index workflow).
-    subprocess.run(["bash", ".github/scripts/build-readme.sh"], check=True)
-    subprocess.run(["git", "add", "--", "README.md"], check=True)
-    # Commit + push only if something actually changed (re-ticking an unchanged note is a no-op).
-    if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode != 0:
-        msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"
-        subprocess.run(["git", "commit", "-m", msg], check=True)
-        subprocess.run(["git", "push"], check=True)
-        print("committed and pushed.")
-    else:
-        print("no content change; nothing to commit.")
 
-    for pid, title, _ in published:
-        untick(pid)
-        print(f"published & unticked: {title}")
+def main():
+    publish_github()
+    mirror_company()
 
 
 if __name__ == "__main__":

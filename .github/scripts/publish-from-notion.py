@@ -234,32 +234,21 @@ def build_blocks(page_id):
 CM_VER = "2025-09-03"  # data-source API (the chartmetric DB uses the newer model)
 
 
+# The chartmetric "Infra Notes" data source (data-source ids are stable). Override
+# with CHARTMETRIC_DATA_SOURCE_ID; set it to "" to auto-discover via search instead.
+CM_DATA_SOURCE_ID = os.environ.get("CHARTMETRIC_DATA_SOURCE_ID", "251ad2527326812b89b2000b85f59cde")
+
+
 def cm_data_source():
-    try:
-        db = notion("GET", f"/databases/{CM_DATABASE_ID}", token=CM_TOKEN, ver=CM_VER)
-        ds = db.get("data_sources") or []
-        if ds:
-            return ds[0]["id"]
-        print(f"NOTE: chartmetric DB {CM_DATABASE_ID} has no API-accessible data source.", file=sys.stderr)
-    except urllib.error.HTTPError:
-        print(f"NOTE: chartmetric DB {CM_DATABASE_ID} not directly reachable; searching.", file=sys.stderr)
-    # Ask the integration what it can actually see, and pick a data source.
-    results = notion("POST", "/search", {"page_size": 25}, token=CM_TOKEN, ver=CM_VER).get("results", [])
-    print(f"Integration can see {len(results)} object(s):", file=sys.stderr)
-    chosen = None
-    for r in results:
-        title = "".join(t.get("plain_text", "") for t in (r.get("title") or []))
+    if CM_DATA_SOURCE_ID:
+        return CM_DATA_SOURCE_ID
+    for r in notion("POST", "/search", {"page_size": 25}, token=CM_TOKEN, ver=CM_VER).get("results", []):
+        if r.get("object") == "data_source":
+            return r["id"]
         kids = [d.get("id") for d in (r.get("data_sources") or [])]
-        print(f"  object={r.get('object')} id={r.get('id')} title={title!r} data_sources={kids}", file=sys.stderr)
-        if chosen is None and r.get("object") == "data_source":
-            chosen = r.get("id")
-        if chosen is None and kids:
-            chosen = kids[0]
-    if not chosen:
-        raise SystemExit("This integration can access no usable data source in chartmetric. "
-                         "Open the SOURCE database (not a linked view) and add it via ... -> Connections.")
-    print(f"Using data source: {chosen}", file=sys.stderr)
-    return chosen
+        if kids:
+            return kids[0]
+    raise SystemExit("This integration can access no usable data source in chartmetric.")
 
 
 def cm_title_prop(ds_id):

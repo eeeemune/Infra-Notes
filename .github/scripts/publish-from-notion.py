@@ -172,9 +172,14 @@ def main():
     # Rebuild the index in the same commit (the token push won't trigger the index workflow).
     subprocess.run(["bash", ".github/scripts/build-readme.sh"], check=True)
     subprocess.run(["git", "add", "README.md"], check=True)
-    msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"
-    subprocess.run(["git", "commit", "-m", msg], check=True)
-    subprocess.run(["git", "push"], check=True)
+    # Commit + push only if something actually changed (re-ticking an unchanged note is a no-op).
+    if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode != 0:
+        msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"
+        subprocess.run(["git", "commit", "-m", msg], check=True)
+        subprocess.run(["git", "push"], check=True)
+        print("committed and pushed.")
+    else:
+        print("no content change; nothing to commit.")
 
     for pid, title, _ in published:
         untick(pid)

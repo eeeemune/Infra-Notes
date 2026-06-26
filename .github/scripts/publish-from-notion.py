@@ -166,7 +166,7 @@ def main():
         os.makedirs(NOTE_DIR, exist_ok=True)
         with open(target, "w") as f:
             f.write(content)
-        subprocess.run(["git", "add", target], check=True)
+        subprocess.run(["git", "add", "--", target], check=True)
         published.append((pg["id"], title, category))
         print(f"staged: {target}")
 
@@ -176,7 +176,7 @@ def main():
 
     # Rebuild the index in the same commit (the token push won't trigger the index workflow).
     subprocess.run(["bash", ".github/scripts/build-readme.sh"], check=True)
-    subprocess.run(["git", "add", "README.md"], check=True)
+    subprocess.run(["git", "add", "--", "README.md"], check=True)
     # Commit + push only if something actually changed (re-ticking an unchanged note is a no-op).
     if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode != 0:
         msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"

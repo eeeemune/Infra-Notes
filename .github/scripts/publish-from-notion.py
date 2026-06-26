@@ -12,7 +12,7 @@ trigger other workflows, so we rebuild README here instead of relying on it.
 No-ops cleanly when NOTION_TOKEN is absent, so the schedule stays quiet until the
 repo secret is added.
 """
-import json, os, re, subprocess, sys, urllib.request
+import json, os, re, subprocess, sys, urllib.error, urllib.request
 
 TOKEN = os.environ.get("NOTION_TOKEN", "").strip()
 DATABASE_ID = os.environ.get("NOTES_DATABASE_ID", "2503f66f52258047b727c219b03e4a1a")
@@ -40,8 +40,13 @@ def notion(method, path, body=None):
                  "Content-Type": "application/json"},
         data=json.dumps(body).encode() if body is not None else None,
     )
-    with urllib.request.urlopen(req) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        print(f"Notion API error: {method} {path} -> HTTP {e.code}", file=sys.stderr)
+        print(e.read().decode("utf-8", "replace"), file=sys.stderr)
+        raise
 
 
 def rich(texts):

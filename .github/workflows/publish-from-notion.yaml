@@ -1,0 +1,21 @@
+name: Publish notes from Notion
+
+on:
+  schedule:
+    - cron: '3,13,23,33,43,53 * * * *'   # every 10 min, off the :00 mark
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Publish notes ticked "Publish to GitHub"
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: python3 .github/scripts/publish-from-notion.py

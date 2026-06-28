@@ -239,6 +239,7 @@
 ### [ArgoCD](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20ArgoCD.md)
 - 💚 ArgoCD
    - 💛 What is it?
+      - 🤍 The idea
    - 💛 Why do we need it?
       - 🤍 Real-world use case
    - 💛 How does it work?

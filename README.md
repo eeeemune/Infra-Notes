@@ -236,6 +236,19 @@
    - 🤍 Summary
 - Reference
 
+### [ArgoCD](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20ArgoCD.md)
+- 💚 ArgoCD
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Reconcile Flow
+      - 🤍 Example: an Application
+      - 🤍 Example: CLI
+   - 💛 Push vs Pull (why GitOps matters)
+   - 💛 Gotcha
+   - 💛 References
+
 ### [ECS to EKS Migration Guide](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20ECS%20to%20EKS%20Migration%20Guide.md)
 - 💚 ECS to EKS Migration Guide
    - 💛 Before You Start…

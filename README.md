@@ -1,6 +1,19 @@
 # Contents
 
 ## AWS
+### [Athena and CUR (AWS Cost and Usage Report)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20Athena%20and%20CUR%20%28AWS%20Cost%20and%20Usage%20Report%29.md)
+- 💚 Athena and CUR (AWS Cost and Usage Report)
+   - 💛 What are they?
+   - 💛 Why do we need them?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Request Flow
+      - 🤍 Example: set up CUR (CLI)
+      - 🤍 Example: query costs with Athena (SQL)
+   - 💛 Cost gotcha (Athena bills you too)
+   - 💛 Gotcha
+   - 💛 References
+
 ### [How to connect your terminal to EKS](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20connect%20your%20terminal%20to%20EKS.md)
 - 💚 How to connect your terminal to EKS
    - 💛 Prerequisites

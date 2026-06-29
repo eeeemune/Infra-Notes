@@ -251,12 +251,34 @@ def cm_data_source():
     raise SystemExit("This integration can access no usable data source in chartmetric.")
 
 
-def cm_title_prop(ds_id):
-    info = notion("GET", f"/data_sources/{ds_id}", token=CM_TOKEN, ver=CM_VER)
-    for name, p in info.get("properties", {}).items():
+def cm_schema(ds_id):
+    props = notion("GET", f"/data_sources/{ds_id}", token=CM_TOKEN, ver=CM_VER).get("properties", {})
+    print("chartmetric data source properties: "
+          + ", ".join(f"{n}({p.get('type')})" for n, p in props.items()), file=sys.stderr)
+    return props
+
+
+def title_prop_of(schema):
+    for name, p in schema.items():
         if p.get("type") == "title":
             return name
     raise SystemExit("chartmetric data source has no title property")
+
+
+def set_prop(out, schema, name, value):
+    """Set property `name` to `value` (a string) per its declared type, if it exists."""
+    p = schema.get(name)
+    if not p or not value:
+        return
+    t = p.get("type")
+    if t == "select":
+        out[name] = {"select": {"name": value}}
+    elif t == "multi_select":
+        out[name] = {"multi_select": [{"name": value}]}
+    elif t == "status":
+        out[name] = {"status": {"name": value}}
+    elif t == "rich_text":
+        out[name] = {"rich_text": [{"type": "text", "text": {"content": value}}]}
 
 
 def cm_exists(ds_id, title_prop, title):
@@ -274,9 +296,11 @@ def mirror_company():
         print("No notes flagged for company mirror.")
         return
     ds_id = cm_data_source()
-    title_prop = cm_title_prop(ds_id)
+    schema = cm_schema(ds_id)
+    title_prop = title_prop_of(schema)
     for pg in pages:
-        title = prop_text(pg["properties"], "Name")
+        props_in = pg["properties"]
+        title = prop_text(props_in, "Name")
         if not title:
             print("skip: empty Name")
             continue
@@ -284,15 +308,19 @@ def mirror_company():
             print(f"company: '{title}' already exists; skipping (delete it there to re-mirror).")
             untick(pg["id"], "Publish to Company")
             continue
+        gh_tag = prop_text(props_in, "GH Category") or first_tag(props_in)
+        out_props = {title_prop: {"title": [{"type": "text", "text": {"content": title}}]}}
+        set_prop(out_props, schema, "Category", "Infra")  # company copies are always Category = Infra
+        set_prop(out_props, schema, "Tags", gh_tag)        # Tags = the note's GitHub tag (GH Category)
         body = {
             "parent": {"type": "data_source_id", "data_source_id": ds_id},
             "icon": {"type": "emoji", "emoji": "\U0001f49a"},
-            "properties": {title_prop: {"title": [{"type": "text", "text": {"content": title}}]}},
+            "properties": out_props,
             "children": build_blocks(pg["id"]),
         }
         res = notion("POST", "/pages", body, token=CM_TOKEN, ver=CM_VER)
         untick(pg["id"], "Publish to Company")
-        print(f"company mirrored: {title} -> {res.get('url')}")
+        print(f"company mirrored: {title} (Category=Infra, Tags={gh_tag}) -> {res.get('url')}")
 
 
 def main():

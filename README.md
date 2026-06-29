@@ -1,6 +1,40 @@
 # Contents
 
 ## AWS
+### [AWS Lightsail](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Lightsail.md)
+- 💚 AWS Lightsail
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use cases
+   - 💛 What you get
+   - 💛 How does it work?
+      - 🤍 Request Flow (typical web app)
+      - 🤍 Example: launch via CLI
+   - 💛 Lightsail vs EC2
+   - 💛 Gotcha
+   - 💛 References
+
+### [AWS Savings Plans](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Savings%20Plans.md)
+- 💚 AWS Savings Plans
+- 💚 AWS Savings Plans
+   - 💛 What is it?
+   - 💛 Types of Savings Plans
+      - 🤍 Compute Savings Plans
+      - 🤍 EC2 Instance Savings Plans
+   - 💛 Example
+      - 🤍 Without Savings Plan
+      - 🤍 With Savings Plan (say, 30% discount)
+   - 💛 Benefits
+   - 💛 References
+
+### [AWS Spot Instance Data Feed](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Spot%20Instance%20Data%20Feed.md)
+- 💚 AWS Spot Instance Data Feed
+- 💚 AWS Spot Instance Data Feed
+   - 💛 What it is
+   - 💛 What's in each file
+   - 💛 Why we(Chartmetric) need it
+   - 💛 Good to know
+
 ### [Athena and CUR (AWS Cost and Usage Report)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20Athena%20and%20CUR%20%28AWS%20Cost%20and%20Usage%20Report%29.md)
 - 💚 Athena and CUR (AWS Cost and Usage Report)
    - 💛 What are they?
@@ -14,7 +48,34 @@
    - 💛 Gotcha
    - 💛 References
 
+### [How to Block Specific IP Address by AWS WAF](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20Block%20Specific%20IP%20Address%20by%20AWS%20WAF.md)
+- 💚 How to Block Specific IP Address by AWS WAF
+- 💚 How to Block a Specific IP Address using AWS WAF
+   - 💛 What is AWS WAF?
+   - 💛 Steps to Block a Specific IP Address
+      - 🤍 1. Create an IP Set
+      - 🤍 2. Create a Web ACL
+      - 🤍 3. Add a Rule to Block IPs
+      - 🤍 4. Save and Deploy
+
+### [How to Set Up AWS Resource Notification](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20Set%20Up%20AWS%20Resource%20Notification.md)
+- 💚 How to Set Up AWS Resource Notification
+- 💚 How to Set Up AWS Resource Notification
+   - 💛 Configure AWS Chatbot with Slack
+      - 🤍 Subscribe Topics
+   - 💛 Create SNS Topic
+   - 💛 Amazon EventBridge (Event Detection)
+
+### [How to Test RDS Connection on Mac](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20Test%20RDS%20Connection%20on%20Mac.md)
+- 💚 How to Test RDS Connection on Mac
+- 💚 How to Test RDS Connection on Mac
+   - 💛 Install PostgreSQL
+   - 💛 Test
+      - 🤍 basic connectivity
+      - 🤍 Test with credentials
+
 ### [How to connect your terminal to EKS](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20How%20to%20connect%20your%20terminal%20to%20EKS.md)
+- 💚 How to connect your terminal to EKS
 - 💚 How to connect your terminal to EKS
    - 💛 Prerequisites
       - 🤍 Required tools
@@ -97,6 +158,7 @@
    - 💛 Start an Interactive Shell
 
 ### [How to Sign in Docker with AWS SSO](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Docker]%20How%20to%20Sign%20in%20Docker%20with%20AWS%20SSO.md)
+- 💚 How to Sign in Docker with AWS SSO
 - 💚 Command
 - 💚 Explain
    - 💛 Sign in Docker with Terminal

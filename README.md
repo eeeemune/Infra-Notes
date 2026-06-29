@@ -12,6 +12,21 @@
       - 🤍 4. Test
 
 
+## DB
+### [OLTP and OLAP](https://github.com/eeeemune/Infra-Notes/blob/main/-/[DB]%20OLTP%20and%20OLAP.md)
+- 💚 OLTP and OLAP
+   - 💛 What are they?
+   - 💛 Why do we need both?
+      - 🤍 Real-world examples
+   - 💛 How are they different under the hood?
+      - 🤍 Row vs Column storage
+      - 🤍 Side by side
+   - 💛 How they connect (the pipeline)
+      - 🤍 Data Flow
+   - 💛 Gotcha
+   - 💛 References
+
+
 ## DNS
 ### [How to Set Certificate with Let’s Encrypt (Via Certbot)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[DNS]%20How%20to%20Set%20Certificate%20with%20Let’s%20Encrypt%20%28Via%20Certbot%29.md)
 - 💚 How to Set Certificate with Let’s Encrypt (Via Certbot)
@@ -310,6 +325,34 @@
       - 🤍 List Up Secrets
       - 🤍 See The Value for Secret
    - 💛 References
+
+### [Kubernetes CRD (Custom Resource Definition)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Kubernetes%20CRD%20%28Custom%20Resource%20Definition%29.md)
+- 💚 Kubernetes CRD (Custom Resource Definition)
+- 💚 Kubernetes CRD (Custom Resource Definition)
+   - 💛 What is a CRD?
+      - 🤍 Simple definition
+   - 💛 Why CRDs exist
+      - 🤍 The problem they solve
+   - 💛 Example CRD in the wild
+      - 🤍 External Secrets Operator
+   - 💛 How CRDs actually work
+      - 🤍 Two main parts
+   - 💛 Example CRD definition
+      - 🤍 The CRD itself
+   - 💛 Example Custom Resource
+      - 🤍 A resource created using the CRD
+   - 💛 Popular Kubernetes tools built on CRDs
+      - 🤍 Many major projects rely on CRDs
+   - 💛 How to see CRDs in your cluster
+      - 🤍 List all CRDs
+      - 🤍 Inspect a CRD
+      - 🤍 List custom resources
+   - 💛 CRD vs Built-in Kubernetes objects
+      - 🤍 Comparison
+   - 💛 Mental model (easy 🌱)
+      - 🤍 Think of CRDs as
+   - 💛 Real-world example architecture
+      - 🤍 AWS Secrets → Kubernetes
 
 ### [Kubernetes Migration Common Mistakes & Tips](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Kubernetes%20Migration%20Common%20Mistakes%20&%20Tips.md)
 - 💚 Kubernetes Migration Common Mistakes & Tips

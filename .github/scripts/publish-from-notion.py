@@ -29,8 +29,14 @@ SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "").strip()
 SLACK_CHANNEL = os.environ.get("SLACK_CHANNEL_ID", "C08UL571JH1").strip()
 GH_BASE = "https://github.com/eeeemune/Infra-Notes/blob/main/-/"
 
+# AWS's reserved documentation placeholder account IDs — safe to appear in public
+# examples (an ARN using one of these is illustrative, not our real infra).
+EXAMPLE_ACCOUNTS = "111122223333|123456789012|444455556666|555555555555|000000000000"
 SENSITIVE = re.compile(
-    r"arn:aws:|897744604563|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
+    # ARNs that carry a *real* 12-digit account are blocked (defense-in-depth on top of
+    # the explicit account literal below); ARNs whose account is an AWS example id pass.
+    rf"arn:aws:[a-z0-9-]*:[a-z0-9-]*:(?!{EXAMPLE_ACCOUNTS})[0-9]{{12}}|"
+    r"897744604563|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
     r"10\.[0-9]+\.[0-9]+\.[0-9]+|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|"
     r"cm-ro|cm_cluster|eunhye-local-ro|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|"
     r"-----BEGIN|(password|secret|token|api[_-]?key)\s*[:=]",
@@ -154,7 +160,7 @@ def index_block(title, category, content):
     its heading outline (# -> top, ## / ### nested with the 💚/💛/🤍 hearts the note
     already carries). Mirrors the per-note block build-readme.sh writes to README.md."""
     url = GH_BASE + urlenc(f"[{category}] {title}.md")
-    lines = [f":memo: *New infra note published* — <{url}|{title}>  `[{category}]`"]
+    lines = [f"<{url}|{title}>"]
     in_code = False
     for line in content.splitlines():
         if line.startswith("```"):

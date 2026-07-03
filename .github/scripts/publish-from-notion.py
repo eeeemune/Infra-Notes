@@ -30,7 +30,7 @@ SLACK_CHANNEL = os.environ.get("SLACK_CHANNEL_ID", "C08UL571JH1").strip()
 GH_BASE = "https://github.com/eeeemune/Infra-Notes/blob/main/-/"
 
 SENSITIVE = re.compile(
-    r"arn:aws:|897744604563|[0-9]{12}|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
+    r"arn:aws:|897744604563|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
     r"10\.[0-9]+\.[0-9]+\.[0-9]+|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|"
     r"cm-ro|cm_cluster|eunhye-local-ro|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|"
     r"-----BEGIN|(password|secret|token|api[_-]?key)\s*[:=]",

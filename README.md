@@ -14,6 +14,19 @@
    - 💛 Gotcha
    - 💛 References
 
+### [AWS Glue](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Glue.md)
+- 💚 AWS Glue
+- 💚 AWS Glue
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Request Flow
+      - 🤍 Example: run a crawler (CLI)
+      - 🤍 Example: a Glue ETL job (PySpark)
+   - 💛 Gotcha
+   - 💛 References
+
 ### [AWS Lightsail](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Lightsail.md)
 - 💚 AWS Lightsail
    - 💛 What is it?

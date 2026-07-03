@@ -1,6 +1,19 @@
 # Contents
 
 ## AWS
+### [AWS CUR (Cost and Usage Report)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20CUR%20%28Cost%20and%20Usage%20Report%29.md)
+- 💚 AWS CUR (Cost and Usage Report)
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Request Flow
+      - 🤍 Example: create a CUR (CLI)
+   - 💛 Key columns to know
+      - 🤍 unblended vs blended vs amortized
+   - 💛 Gotcha
+   - 💛 References
+
 ### [AWS Lightsail](https://github.com/eeeemune/Infra-Notes/blob/main/-/[AWS]%20AWS%20Lightsail.md)
 - 💚 AWS Lightsail
    - 💛 What is it?

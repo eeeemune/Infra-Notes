@@ -427,6 +427,20 @@
       - 🤍 See The Value for Secret
    - 💛 References
 
+### [IAM Roles for Service Accounts](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20IAM%20Roles%20for%20Service%20Accounts.md)
+- 💚 IAM Roles for Service Accounts
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Request Flow
+   - 💛 How to use it smartly
+      - 🤍 Example: the trust policy (scoped to one SA)
+      - 🤍 Example: annotate the service account
+      - 🤍 Example: one command with eksctl
+   - 💛 Gotcha
+   - 💛 References
+
 ### [Kubernetes CRD (Custom Resource Definition)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Kubernetes%20CRD%20%28Custom%20Resource%20Definition%29.md)
 - 💚 Kubernetes CRD (Custom Resource Definition)
 - 💚 Kubernetes CRD (Custom Resource Definition)

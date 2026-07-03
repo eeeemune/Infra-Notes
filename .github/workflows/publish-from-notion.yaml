@@ -19,4 +19,6 @@ jobs:
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_CHARTMETRIC_TOKEN: ${{ secrets.NOTION_CHARTMETRIC_TOKEN }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          SLACK_CHANNEL_ID: C08UL571JH1
         run: python3 .github/scripts/publish-from-notion.py

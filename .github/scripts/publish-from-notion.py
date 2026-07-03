@@ -20,6 +20,15 @@ CM_DATABASE_ID = os.environ.get("CHARTMETRIC_DATABASE_ID", "251ad25273268088b7e1
 NOTE_DIR = "-"
 NVER = "2022-06-28"
 
+# Slack announce (optional). When SLACK_TOKEN is set, each note that is newly
+# published to the repo gets its README "index block" posted to this channel. Stays
+# quiet when the token is absent, same as the Notion tokens above. The token can be a
+# bot token (xoxb-, posts as the app) or a user token (xoxp-, posts as you) — both
+# work with chat.postMessage; only the message's author differs.
+SLACK_TOKEN = os.environ.get("SLACK_TOKEN", "").strip()
+SLACK_CHANNEL = os.environ.get("SLACK_CHANNEL_ID", "C08UL571JH1").strip()
+GH_BASE = "https://github.com/eeeemune/Infra-Notes/blob/main/-/"
+
 SENSITIVE = re.compile(
     r"arn:aws:|897744604563|[0-9]{12}|ip-10-[0-9]|ip-172-[0-9]|ip-192-168|"
     r"10\.[0-9]+\.[0-9]+\.[0-9]+|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.|"
@@ -134,6 +143,58 @@ def untick(page_id, prop):
     notion("PATCH", f"/pages/{page_id}", {"properties": {prop: {"checkbox": False}}})
 
 
+# --- Slack announce ---------------------------------------------------------------
+def urlenc(name):
+    # Match build-readme.sh: only space / parens need encoding; brackets stay literal.
+    return name.replace(" ", "%20").replace("(", "%28").replace(")", "%29")
+
+
+def index_block(title, category, content):
+    """Slack-mrkdwn rendering of the note's README index entry: a linked title, then
+    its heading outline (# -> top, ## / ### nested with the 💚/💛/🤍 hearts the note
+    already carries). Mirrors the per-note block build-readme.sh writes to README.md."""
+    url = GH_BASE + urlenc(f"[{category}] {title}.md")
+    lines = [f":memo: *New infra note published* — <{url}|{title}>  `[{category}]`"]
+    in_code = False
+    for line in content.splitlines():
+        if line.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+        if line.startswith("### "):
+            lines.append("      • " + line[4:])
+        elif line.startswith("## "):
+            lines.append("   • " + line[3:])
+        elif line.startswith("# "):
+            lines.append("• " + line[2:])
+    return "\n".join(lines)
+
+
+def post_slack(text):
+    if not SLACK_TOKEN:
+        print("SLACK_TOKEN not set; skipping Slack post.")
+        return
+    body = {"channel": SLACK_CHANNEL, "text": text,
+            "unfurl_links": False, "unfurl_media": False}
+    req = urllib.request.Request(
+        "https://slack.com/api/chat.postMessage", method="POST",
+        headers={"Authorization": "Bearer " + SLACK_TOKEN,
+                 "Content-Type": "application/json; charset=utf-8"},
+        data=json.dumps(body).encode(),
+    )
+    try:
+        with urllib.request.urlopen(req) as r:
+            res = json.load(r)
+        if res.get("ok"):
+            print(f"slack: posted to {SLACK_CHANNEL}")
+        else:
+            # A bad token / bot-not-in-channel must not fail the publish; just warn.
+            print(f"slack: post failed: {res.get('error')}", file=sys.stderr)
+    except Exception as e:
+        print(f"slack: post error: {e}", file=sys.stderr)
+
+
 # --- GitHub publish (public repo) -------------------------------------------------
 def publish_github():
     if not TOKEN:
@@ -166,22 +227,30 @@ def publish_github():
         with open(target, "w") as f:
             f.write(content)
         subprocess.run(["git", "add", "--", target], check=True)
-        published.append((pg["id"], title, category))
+        published.append({"id": pg["id"], "title": title, "category": category,
+                          "content": content, "target": target})
         print(f"staged: {target}")
 
     if published:
         subprocess.run(["bash", ".github/scripts/build-readme.sh"], check=True)
         subprocess.run(["git", "add", "--", "README.md"], check=True)
+        # Only notes whose file actually changed are "new to the repo" — announce those,
+        # not a re-tick of an already-identical note. Check before the commit clears staging.
+        fresh = [p for p in published if subprocess.run(
+            ["git", "diff", "--cached", "--quiet", "--", p["target"]]).returncode != 0]
         if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode != 0:
-            msg = "note: publish from Notion (" + ", ".join(f"[{c}] {t}" for _, t, c in published) + ")"
+            msg = "note: publish from Notion (" + ", ".join(
+                f"[{p['category']}] {p['title']}" for p in published) + ")"
             subprocess.run(["git", "commit", "-m", msg], check=True)
             subprocess.run(["git", "push"], check=True)
             print("committed and pushed.")
+            for p in fresh:
+                post_slack(index_block(p["title"], p["category"], p["content"]))
         else:
             print("no content change; nothing to commit.")
-        for pid, title, _ in published:
-            untick(pid, "Publish to GitHub")
-            print(f"published & unticked: {title}")
+        for p in published:
+            untick(p["id"], "Publish to GitHub")
+            print(f"published & unticked: {p['title']}")
 
 
 # --- Company Notion mirror (private workspace, no guard) --------------------------

@@ -655,6 +655,19 @@
    - 💛 Production Best Practice
    - 💛 References
 
+### [SSH Tunnels (port forwarding)](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20SSH%20Tunnels%20%28port%20forwarding%29.md)
+- 💚 SSH Tunnels (port forwarding)
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 The three kinds
+      - 🤍 -L Local forwarding (the common one)
+      - 🤍 -R Remote forwarding (expose local to the server)
+      - 🤍 -D Dynamic forwarding (SOCKS proxy)
+   - 💛 Handy flags
+   - 💛 Keeping it alive
+   - 💛 Gotcha
+   - 💛 References
+
 ### [What does ‘next build’ do](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20What%20does%20‘next%20build’%20do.md)
 - 💚 What does ‘next build’ do?
    - 💛 Short Answer

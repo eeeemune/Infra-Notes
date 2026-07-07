@@ -112,6 +112,22 @@
       - 🤍 4. Test
 
 
+## BE
+### [ER Diagram Basics](https://github.com/eeeemune/Infra-Notes/blob/main/-/[BE]%20ER%20Diagram%20Basics.md)
+- 💚 ER Diagram Basics
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 The building blocks
+   - 💛 Cardinality (the most important part)
+      - 🤍 Reading crow's foot notation
+      - 🤍 Each notation
+      - 🤍 Full example diagram (Mermaid)
+   - 💛 The many-to-many trick (junction table)
+   - 💛 Gotcha
+   - 💛 References
+
+
 ## DB
 ### [OLTP and OLAP](https://github.com/eeeemune/Infra-Notes/blob/main/-/[DB]%20OLTP%20and%20OLAP.md)
 - 💚 OLTP and OLAP

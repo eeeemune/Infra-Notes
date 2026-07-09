@@ -226,6 +226,22 @@
    - 💛 Reference
 
 
+## FE
+### [How Playwright Works](https://github.com/eeeemune/Infra-Notes/blob/main/-/[FE]%20How%20Playwright%20Works.md)
+- 💚 How Playwright Works
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work (the architecture)?
+      - 🤍 Request Flow
+   - 💛 The two ideas that make it reliable
+      - 🤍 Browser contexts
+      - 🤍 Auto-waiting (actionability)
+   - 💛 Locators vs selectors
+   - 💛 Gotcha
+   - 💛 References
+
+
 ## GCP
 ### [How to Create OAuth Client](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GCP]%20How%20to%20Create%20OAuth%20Client.md)
 - 💚 How to Create OAuth Client

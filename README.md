@@ -501,6 +501,21 @@
    - 💛 Real-world example architecture
       - 🤍 AWS Secrets → Kubernetes
 
+### [Kubernetes Job](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Kubernetes%20Job.md)
+- 💚 Kubernetes Job
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Key fields
+      - 🤍 Lifecycle Flow
+      - 🤍 Example: a one-off migration Job
+      - 🤍 Example: a parallel batch Job
+      - 🤍 Handy commands
+   - 💛 Job vs CronJob
+   - 💛 Gotcha
+   - 💛 References
+
 ### [Kubernetes Migration Common Mistakes & Tips](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Kubernetes]%20Kubernetes%20Migration%20Common%20Mistakes%20&%20Tips.md)
 - 💚 Kubernetes Migration Common Mistakes & Tips
    - 💛 Common Mistakes
@@ -697,6 +712,22 @@
       - 🤍 -D Dynamic forwarding (SOCKS proxy)
    - 💛 Handy flags
    - 💛 Keeping it alive
+   - 💛 Gotcha
+   - 💛 References
+
+### [Setting up a Claude Cloud Environment](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20Setting%20up%20a%20Claude%20Cloud%20Environment.md)
+- 💚 Setting up a Claude Cloud Environment
+   - 💛 What is it?
+   - 💛 Why do we need it?
+   - 💛 What comes preinstalled
+   - 💛 Where you set it up
+   - 💛 The setup script
+      - 🤍 Setup script vs SessionStart hook
+   - 💛 Environment variables (not a secrets store)
+   - 💛 Repositories
+   - 💛 Network access (four levels)
+   - 💛 Compute
+   - 💛 Lifecycle
    - 💛 Gotcha
    - 💛 References
 

@@ -642,6 +642,20 @@
       - 🤍 Data-Driven
    - 💛 Summary
 
+### [Data-Driven Design Pattern](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20Data-Driven%20Design%20Pattern.md)
+- 💚 Data-Driven Design Pattern
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How does it work?
+      - 🤍 Example: dispatch table instead of a switch
+      - 🤍 Example: rules as config (data, not code)
+      - 🤍 Example: a state machine as a transition table
+   - 💛 When it shines, when it hurts
+   - 💛 Data-driven vs data-oriented (do not confuse)
+   - 💛 Gotcha
+   - 💛 References
+
 ### [How VPN Works](https://github.com/eeeemune/Infra-Notes/blob/main/-/[Others]%20How%20VPN%20Works.md)
 - 💚 How VPN Works?
    - 💛 What is a VPN?

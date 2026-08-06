@@ -264,6 +264,17 @@
 
 
 ## GitHub
+### [GitHub Stacked PR](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20GitHub%20Stacked%20PR.md)
+- 💚 GitHub Stacked PR
+   - 💛 What is it?
+   - 💛 Why do we need it?
+      - 🤍 Real-world use case
+   - 💛 How it works (the mental model)
+      - 🤍 Change a lower layer (the key skill)
+      - 🤍 Sync and merge
+   - 💛 Gotcha
+   - 💛 References
+
 ### [How to Configure GitHub on Your Terminal](https://github.com/eeeemune/Infra-Notes/blob/main/-/[GitHub]%20How%20to%20Configure%20GitHub%20on%20Your%20Terminal.md)
 - 💚 How to Configure Git on Your Terminal
    - 💛 1. Set Your Identity (Required)
